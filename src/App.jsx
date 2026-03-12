@@ -116,7 +116,7 @@ const Hero = () => (
 
 
 const ProductCard = ({ product, isFavorite, onToggleFavorite, onAddToCart }) => (
-  <div className="bg-white dark:bg-[#1f1a14] border border-gold/25 group transition-all duration-300 hover:shadow-[0_16px_48px_rgba(26,23,20,0.25)] hover:-translate-y-1">
+  <div className="bg-white dark:bg-[#1f1a14] border border-gold/15 group transition-all duration-300 hover:shadow-[0_12px_40px_rgba(26,23,20,0.15)] hover:-translate-y-0.5">
     <div className="aspect-square overflow-hidden bg-gold-pale dark:bg-slate-900 relative">
       <img
         src={product.image}
@@ -124,42 +124,42 @@ const ProductCard = ({ product, isFavorite, onToggleFavorite, onAddToCart }) => 
         className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 ${product.stock === 0 ? 'grayscale opacity-70' : ''}`}
       />
       {product.stock === 0 ? (
-        <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-red-600/90 text-white text-[0.7rem] tracking-widest uppercase px-5 py-2 z-20 font-bold shadow-xl">
+        <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-red-600/90 text-white text-[0.6rem] tracking-widest uppercase px-4 py-1.5 z-20 font-bold shadow-xl">
           Agotado
         </span>
       ) : product.tag && (
-        <span className="absolute top-3.5 left-3.5 bg-dark dark:bg-gold text-gold-light dark:text-white text-[0.6rem] tracking-widest uppercase px-2.5 py-1">
+        <span className="absolute top-2.5 left-2.5 bg-dark dark:bg-gold text-gold-light dark:text-white text-[0.55rem] tracking-widest uppercase px-2 py-0.5">
           {product.tag}
         </span>
       )}
       <button
         onClick={() => onToggleFavorite(product.id)}
-        className={`absolute top-3 right-3 w-8 h-8 rounded-full bg-white dark:bg-dark border border-gold/20 flex items-center justify-center transition-all shadow-sm ${isFavorite ? 'text-red-500' : 'text-slate-400 hover:text-red-500'}`}
+        className={`absolute top-2.5 right-2.5 w-7 h-7 rounded-full bg-white dark:bg-dark border border-gold/10 flex items-center justify-center transition-all shadow-sm ${isFavorite ? 'text-red-500' : 'text-slate-400 hover:text-red-500'}`}
       >
         <span
-          className="material-symbols-outlined notranslate !text-lg"
+          className="material-symbols-outlined notranslate !text-base"
           style={{ fontVariationSettings: isFavorite ? "'FILL' 1" : "'FILL' 0" }}
         >
           favorite
         </span>
       </button>
     </div>
-    <div className="p-5 border-t border-gold/25">
-      <p className="text-[0.65rem] tracking-widest uppercase text-gold mb-1.5">{product.category}</p>
-      <h3 className="font-serif text-lg font-normal text-dark dark:text-white mb-3 leading-snug">{product.name}</h3>
-      <div className="flex items-center justify-between mt-1">
-        <span className="text-base font-medium text-dark dark:text-gold-light">
+    <div className="p-3 md:p-4 border-t border-gold/15">
+      <p className="text-[0.55rem] tracking-[0.15em] uppercase text-gold mb-1">{product.category}</p>
+      <h3 className="font-serif text-[0.95rem] font-normal text-dark dark:text-white mb-2 leading-tight h-10 line-clamp-2">{product.name}</h3>
+      <div className="flex items-center justify-between mt-0.5">
+        <span className="text-sm font-medium text-dark dark:text-gold-light">
           {new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP' }).format(product.price)}
         </span>
         <button
           onClick={() => product.stock > 0 && onAddToCart(product)}
           disabled={product.stock === 0}
-          className={`px-4 py-2 font-sans text-[0.65rem] tracking-wider uppercase transition-colors ${product.stock === 0
-            ? 'bg-slate-200 dark:bg-slate-800 text-slate-400 dark:text-slate-500 cursor-not-allowed'
-            : 'bg-dark dark:bg-gold text-gold-light dark:text-white hover:bg-gold dark:hover:bg-white dark:hover:text-dark hover:text-white'
+          className={`px-3 py-1.5 font-sans text-[0.6rem] tracking-wider uppercase transition-colors ${product.stock === 0
+            ? 'bg-slate-100 dark:bg-slate-800 text-slate-400 cursor-not-allowed'
+            : 'bg-dark dark:bg-gold text-white hover:bg-gold dark:hover:bg-white dark:hover:text-dark transition-all'
             }`}
         >
-          {product.stock === 0 ? 'Agotado' : '+ Agregar'}
+          {product.stock === 0 ? 'Fin' : 'Añadir'}
         </button>
       </div>
     </div>
@@ -398,7 +398,7 @@ function StoreFront({
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-8">
           {filteredProducts.map(product => (
             <ProductCard
               key={product.id}
