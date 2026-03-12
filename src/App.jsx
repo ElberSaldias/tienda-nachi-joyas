@@ -179,7 +179,7 @@ const Hero = () => (
 
 
 
-const ProductCard = ({ product, isFavorite, onToggleFavorite, onAddToCart, isInCart }) => (
+const ProductCard = ({ product, isFavorite, onToggleFavorite, onAddToCart, isStockReached }) => (
   <div className="bg-white dark:bg-[#1f1a14] border border-gold/15 group transition-all duration-300 hover:shadow-[0_12px_40px_rgba(26,23,20,0.15)] hover:-translate-y-0.5">
     <div className="aspect-square overflow-hidden bg-gold-pale dark:bg-slate-900 relative">
       <img
@@ -216,14 +216,14 @@ const ProductCard = ({ product, isFavorite, onToggleFavorite, onAddToCart, isInC
           {new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP' }).format(product.price)}
         </span>
         <button
-          onClick={() => product.stock > 0 && !isInCart && onAddToCart(product)}
-          disabled={product.stock === 0 || isInCart}
-          className={`px-3 py-1.5 font-sans text-[0.6rem] tracking-wider uppercase transition-colors ${product.stock === 0 || isInCart
+          onClick={() => product.stock > 0 && !isStockReached && onAddToCart(product)}
+          disabled={product.stock === 0 || isStockReached}
+          className={`px-3 py-1.5 font-sans text-[0.6rem] tracking-wider uppercase transition-colors ${product.stock === 0 || isStockReached
             ? 'bg-slate-100 dark:bg-slate-800 text-slate-400 cursor-not-allowed'
             : 'bg-dark dark:bg-gold text-white hover:bg-gold dark:hover:bg-white dark:hover:text-dark transition-all'
             }`}
         >
-          {product.stock === 0 ? 'Fin' : isInCart ? 'Ya en la bolsa' : 'Añadir'}
+          {product.stock === 0 ? 'Fin' : isStockReached ? 'Máximo en bolsa' : 'Añadir'}
         </button>
       </div>
     </div>
@@ -472,16 +472,21 @@ function StoreFront({
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-8">
-          {filteredProducts.map(product => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              isFavorite={favorites.includes(product.id)}
-              onToggleFavorite={toggleFavorite}
-              onAddToCart={addToCart}
-              isInCart={cart.some(item => item.id === product.id)}
-            />
-          ))}
+          {filteredProducts.map(product => {
+            const cartItem = cart.find(item => item.id === product.id);
+            const isStockReached = cartItem ? cartItem.quantity >= product.stock : false;
+            
+            return (
+              <ProductCard
+                key={product.id}
+                product={product}
+                isFavorite={favorites.includes(product.id)}
+                onToggleFavorite={toggleFavorite}
+                onAddToCart={addToCart}
+                isStockReached={isStockReached}
+              />
+            );
+          })}
         </div>
       </section>
 
@@ -510,10 +515,18 @@ export default function App() {
 
   const addToCart = (product) => {
     if (product.stock === 0) return;
+
+    // Strict validation before updating state
+    const existingInCart = cart.find(item => item.id === product.id);
+    if (existingInCart && existingInCart.quantity >= product.stock) {
+      console.warn(`Stock limit reached for ${product.name}`);
+      return;
+    }
+
     setCart(prev => {
       const existingItem = prev.find(item => item.id === product.id);
       if (existingItem) {
-        // Enforce inventory limit
+        // Double check within state updater
         if (existingItem.quantity >= product.stock) return prev;
         
         return prev.map(item =>
