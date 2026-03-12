@@ -28,7 +28,7 @@ const Header = ({ favoritesCount, onCategorySelect, searchTerm, onSearchChange, 
             onCategorySelect(item.id);
             onShowFavorites(false);
           }}
-          className="nav-link text-[0.78rem] tracking-wider uppercase text-mid dark:text-slate-300 hover:text-dark dark:hover:text-white font-normal"
+          className="nav-link notranslate text-[0.78rem] tracking-wider uppercase text-mid dark:text-slate-300 hover:text-dark dark:hover:text-white font-normal"
         >
           {item.name}
         </a>
@@ -121,7 +121,7 @@ const MobileMenu = ({ isOpen, onClose, onCategorySelect }) => (
                 }
                 onClose();
               }}
-              className="font-sans text-xs tracking-[0.2em] uppercase text-mid dark:text-slate-300 hover:text-gold transition-colors pb-4 border-b border-gold/5"
+              className="font-sans notranslate text-xs tracking-[0.2em] uppercase text-mid dark:text-slate-300 hover:text-gold transition-colors pb-4 border-b border-gold/5"
             >
               {item.name}
             </a>
@@ -242,13 +242,13 @@ const PromoBanner = () => (
     </div>
     <div className="relative z-10 px-6 md:px-20 max-w-[580px]">
       <span className="text-[0.68rem] tracking-widest uppercase text-gold mb-3.5 block">Colección Especial</span>
-      <h2 className="font-serif text-5xl font-light text-white leading-tight mb-5">
+      <h2 className="font-serif notranslate text-5xl font-light text-white leading-tight mb-5">
         Dijes que <em className="italic text-gold-light">te</em><br />identifican
       </h2>
       <p className="text-white/70 text-[0.92rem] font-light leading-loose mb-9">
         Cada dije cuenta una historia única. Personaliza tu pulsera con los momentos que más importan.
       </p>
-      <a href="#" className="bg-gold hover:bg-[#a0804f] text-white px-9 py-4 font-sans text-[0.75rem] tracking-wider uppercase transition-all">
+      <a href="#" className="bg-gold notranslate hover:bg-[#a0804f] text-white px-9 py-4 font-sans text-[0.75rem] tracking-wider uppercase transition-all">
         Ver Dijes
       </a>
     </div>
