@@ -116,7 +116,7 @@ const sendSaleEmail = async (orderData) => {
     const mailOptions = {
         from: `"Charms Lumina" <${process.env.EMAIL_USER}>`,
         to: payer.email,
-        bcc: 'esaldiashiring@gmail.com',
+        bcc: ['esaldiashiring@gmail.com', 'paula.poblete.frez@gmail.com'],
         subject: subject,
         html: `
             <!DOCTYPE html>
