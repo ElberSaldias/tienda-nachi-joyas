@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
 
 
-const Header = ({ favoritesCount, onCategorySelect, searchTerm, onSearchChange, onShowFavorites, showFavoritesOnly, cartCount, onShowCart }) => (
+const Header = ({ favoritesCount, onCategorySelect, searchTerm, onSearchChange, onShowFavorites, showFavoritesOnly, cartCount, onShowCart, onMenuOpen }) => (
   <header className="sticky top-0 z-[100] bg-white/95 dark:bg-dark/95 backdrop-blur-md border-b border-gold/25 px-6 md:px-12 flex items-center justify-between h-[72px] transition-colors">
     <a href="#" onClick={() => { onCategorySelect('All'); onSearchChange(''); onShowFavorites(false); }} className="flex flex-col items-start no-underline leading-none group">
       <span className="font-serif italic text-3xl text-dark dark:text-white tracking-tight">Lúmina</span>
@@ -69,11 +69,75 @@ const Header = ({ favoritesCount, onCategorySelect, searchTerm, onSearchChange, 
           <span className="absolute -top-1 -right-1 bg-gold text-white text-[0.6rem] w-4 h-4 rounded-full flex items-center justify-center font-sans font-bold">{cartCount}</span>
         )}
       </button>
-      <button className="lg:hidden text-mid dark:text-slate-300 hover:text-gold transition-colors text-inherit">
+      <button 
+        onClick={onMenuOpen}
+        className="lg:hidden text-mid dark:text-slate-300 hover:text-gold transition-colors text-inherit"
+      >
         <span className="material-symbols-outlined notranslate !text-xl">menu</span>
       </button>
     </div>
   </header>
+);
+
+const MobileMenu = ({ isOpen, onClose, onCategorySelect }) => (
+  <div 
+    className={`fixed inset-0 z-[200] lg:hidden transition-all duration-500 ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
+  >
+    {/* Overlay */}
+    <div 
+      className="absolute inset-0 bg-dark/60 backdrop-blur-sm"
+      onClick={onClose}
+    />
+    
+    {/* Drawer */}
+    <div 
+      className={`absolute top-0 right-0 w-80 h-full bg-white dark:bg-dark shadow-2xl transition-transform duration-500 transform ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
+    >
+      <div className="p-8 flex flex-col h-full">
+        <div className="flex items-center justify-between mb-12">
+          <span className="font-serif italic text-2xl text-dark dark:text-white">Lúmina</span>
+          <button 
+            onClick={onClose}
+            className="w-10 h-10 flex items-center justify-center rounded-full border border-gold/20 text-mid dark:text-slate-300"
+          >
+            <span className="material-symbols-outlined notranslate">close</span>
+          </button>
+        </div>
+
+        <nav className="flex flex-col gap-8">
+          {[
+            { name: 'Novedades', id: 'All' },
+            { name: 'Dijes', id: 'Dijes' },
+            { name: 'Pulseras', id: 'Bracelets' },
+            { name: 'Collares', id: 'Collares' },
+            { name: 'Sobre Nosotras', id: 'all' }
+          ].map((item) => (
+            <a
+              key={item.name}
+              href="#coleccion"
+              onClick={() => {
+                if (item.name !== 'Sobre Nosotras') {
+                  onCategorySelect(item.id);
+                }
+                onClose();
+              }}
+              className="font-sans text-xs tracking-[0.2em] uppercase text-mid dark:text-slate-300 hover:text-gold transition-colors pb-4 border-b border-gold/5"
+            >
+              {item.name}
+            </a>
+          ))}
+        </nav>
+
+        <div className="mt-auto pt-10 border-t border-gold/10">
+          <p className="text-[0.65rem] tracking-widest uppercase text-gold mb-6">Síguenos</p>
+          <div className="flex gap-6">
+            <span className="material-symbols-outlined notranslate text-mid dark:text-slate-400 !text-lg">brand_awareness</span>
+            <span className="material-symbols-outlined notranslate text-mid dark:text-slate-400 !text-lg">podcasts</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 );
 
 
@@ -340,6 +404,8 @@ function StoreFront({
   cart, cartCount, addToCart, removeFromCart, updateQuantity,
   isCartOpen, setIsCartOpen
 }) {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   const filteredProducts = products.filter(p => {
     const matchesCategory = selectedCategory === 'All' || p.category.toLowerCase().includes(selectedCategory.toLowerCase());
     const matchesSearch = p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -360,6 +426,13 @@ function StoreFront({
         showFavoritesOnly={showFavoritesOnly}
         cartCount={cartCount}
         onShowCart={() => setIsCartOpen(true)}
+        onMenuOpen={() => setIsMobileMenuOpen(true)}
+      />
+
+      <MobileMenu 
+        isOpen={isMobileMenuOpen}
+        onClose={() => setIsMobileMenuOpen(false)}
+        onCategorySelect={setSelectedCategory}
       />
 
       <CartDrawer
