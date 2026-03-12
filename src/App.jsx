@@ -179,7 +179,7 @@ const Hero = () => (
 
 
 
-const ProductCard = ({ product, isFavorite, onToggleFavorite, onAddToCart }) => (
+const ProductCard = ({ product, isFavorite, onToggleFavorite, onAddToCart, isInCart }) => (
   <div className="bg-white dark:bg-[#1f1a14] border border-gold/15 group transition-all duration-300 hover:shadow-[0_12px_40px_rgba(26,23,20,0.15)] hover:-translate-y-0.5">
     <div className="aspect-square overflow-hidden bg-gold-pale dark:bg-slate-900 relative">
       <img
@@ -216,14 +216,14 @@ const ProductCard = ({ product, isFavorite, onToggleFavorite, onAddToCart }) => 
           {new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP' }).format(product.price)}
         </span>
         <button
-          onClick={() => product.stock > 0 && onAddToCart(product)}
-          disabled={product.stock === 0}
-          className={`px-3 py-1.5 font-sans text-[0.6rem] tracking-wider uppercase transition-colors ${product.stock === 0
+          onClick={() => product.stock > 0 && !isInCart && onAddToCart(product)}
+          disabled={product.stock === 0 || isInCart}
+          className={`px-3 py-1.5 font-sans text-[0.6rem] tracking-wider uppercase transition-colors ${product.stock === 0 || isInCart
             ? 'bg-slate-100 dark:bg-slate-800 text-slate-400 cursor-not-allowed'
             : 'bg-dark dark:bg-gold text-white hover:bg-gold dark:hover:bg-white dark:hover:text-dark transition-all'
             }`}
         >
-          {product.stock === 0 ? 'Fin' : 'Añadir'}
+          {product.stock === 0 ? 'Fin' : isInCart ? 'Ya en la bolsa' : 'Añadir'}
         </button>
       </div>
     </div>
@@ -479,6 +479,7 @@ function StoreFront({
               isFavorite={favorites.includes(product.id)}
               onToggleFavorite={toggleFavorite}
               onAddToCart={addToCart}
+              isInCart={cart.some(item => item.id === product.id)}
             />
           ))}
         </div>
@@ -512,6 +513,9 @@ export default function App() {
     setCart(prev => {
       const existingItem = prev.find(item => item.id === product.id);
       if (existingItem) {
+        // Enforce inventory limit
+        if (existingItem.quantity >= product.stock) return prev;
+        
         return prev.map(item =>
           item.id === product.id
             ? { ...item, quantity: item.quantity + 1 }
@@ -532,9 +536,15 @@ export default function App() {
       removeFromCart(productId);
       return;
     }
-    setCart(prev => prev.map(item =>
-      item.id === productId ? { ...item, quantity: newQuantity } : item
-    ));
+    
+    setCart(prev => prev.map(item => {
+      if (item.id === productId) {
+        // Enforce inventory limit
+        const finalQuantity = Math.min(newQuantity, item.stock);
+        return { ...item, quantity: finalQuantity };
+      }
+      return item;
+    }));
   };
 
   const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
