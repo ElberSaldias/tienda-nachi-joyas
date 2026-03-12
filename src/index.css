@@ -1,0 +1,136 @@
+@import "tailwindcss";
+
+@theme {
+  --color-gold: #B8956A;
+  --color-gold-light: #D4AF82;
+  --color-gold-pale: #F5EDE0;
+  --color-dark: #1A1714;
+  --color-mid: #4A423C;
+  --color-light: #FAF7F3;
+  --color-white: #FFFFFF;
+
+  --font-serif: "Cormorant Garamond", serif;
+  --font-sans: "Jost", sans-serif;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&display=swap');
+
+:root {
+  font-family: 'Jost', sans-serif;
+  --border-gold: rgba(184, 149, 106, 0.25);
+}
+
+body {
+  @apply bg-light text-dark;
+  scroll-behavior: smooth;
+}
+
+.dark body {
+  @apply bg-dark text-light;
+}
+
+/* Custom Utilities based on the template */
+.hero-zoom {
+  animation: heroZoom 12s ease-out forwards;
+}
+
+@keyframes heroZoom {
+  from {
+    transform: scale(1.04);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+.hero-fade {
+  animation: heroFade 1.2s ease-out 0.3s both;
+}
+
+@keyframes heroFade {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.nav-link {
+  @apply relative transition-colors duration-300;
+}
+
+.nav-link::after {
+  content: '';
+  @apply absolute bottom-[-4px] left-0 w-0 h-[1px] bg-gold transition-all duration-300 ease-in-out;
+}
+
+.nav-link:hover::after {
+  @apply w-full;
+}
+
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Animations for Cart Drawer */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-slide-in {
+  animation: slideInRight 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.cart-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.cart-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.cart-scrollbar::-webkit-scrollbar-thumb {
+  background: #B8956A;
+  border-radius: 10px;
+}
+
+.cart-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #A0804F;
+}
