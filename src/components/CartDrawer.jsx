@@ -79,7 +79,9 @@ const CartDrawer = ({ isOpen, onClose, cart, onUpdateQuantity, onRemoveItem }) =
     const validateStep2 = () => {
         const newErrors = {};
         if (!formData.nombre.trim()) newErrors.nombre = 'El nombre es obligatorio';
-        if (!formData.telefono.trim()) newErrors.telefono = 'El teléfono es obligatorio';
+        if (deliveryType === 'chilexpress') {
+            if (!formData.telefono.trim()) newErrors.telefono = 'El teléfono es obligatorio';
+        }
         if (!formData.email.trim()) newErrors.email = 'El email es obligatorio';
         else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Email inválido';
         
@@ -126,6 +128,7 @@ const CartDrawer = ({ isOpen, onClose, cart, onUpdateQuantity, onRemoveItem }) =
                 localStorage.setItem('last_cart', JSON.stringify(cart));
                 localStorage.setItem('last_payer', JSON.stringify(formData));
                 localStorage.setItem('last_shipping', String(shippingCost));
+                localStorage.setItem('last_payment_method', paymentMethod);
                 
                 if (paymentMethod === 'mercadopago' && data.init_point) {
                     window.location.href = data.init_point;
@@ -290,23 +293,25 @@ const CartDrawer = ({ isOpen, onClose, cart, onUpdateQuantity, onRemoveItem }) =
                                                 </p>}
                                             </div>
 
-                                            <div className="space-y-1.5">
-                                                <label className="text-[0.65rem] uppercase tracking-wider text-mid dark:text-slate-400 ml-0.5">Teléfono de Contacto <span className="text-red-500">*</span></label>
-                                                <div className="relative">
-                                                    <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm border-r border-gold/20 pr-2">+56</span>
-                                                    <input
-                                                        type="tel"
-                                                        name="telefono"
-                                                        value={formData.telefono}
-                                                        onChange={handleInputChange}
-                                                        className={`w-full bg-white dark:bg-slate-800 border ${errors.telefono ? 'border-red-500' : 'border-gold/20'} p-3.5 pl-14 text-sm focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/20 transition-all text-dark dark:text-white rounded-none shadow-sm`}
-                                                        placeholder="9 1234 5678"
-                                                    />
+                                            {deliveryType === 'chilexpress' && (
+                                                <div className="space-y-1.5 animate-fade-in">
+                                                    <label className="text-[0.65rem] uppercase tracking-wider text-mid dark:text-slate-400 ml-0.5">Teléfono de Contacto <span className="text-red-500">*</span></label>
+                                                    <div className="relative">
+                                                        <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm border-r border-gold/20 pr-2">+56</span>
+                                                        <input
+                                                            type="tel"
+                                                            name="telefono"
+                                                            value={formData.telefono}
+                                                            onChange={handleInputChange}
+                                                            className={`w-full bg-white dark:bg-slate-800 border ${errors.telefono ? 'border-red-500' : 'border-gold/20'} p-3.5 pl-14 text-sm focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/20 transition-all text-dark dark:text-white rounded-none shadow-sm`}
+                                                            placeholder="9 1234 5678"
+                                                        />
+                                                    </div>
+                                                    {errors.telefono && <p className="text-red-500 text-[0.6rem] mt-1 ml-0.5 flex items-center gap-1">
+                                                        <span className="material-symbols-outlined notranslate !text-[10px]">error</span> {errors.telefono}
+                                                    </p>}
                                                 </div>
-                                                {errors.telefono && <p className="text-red-500 text-[0.6rem] mt-1 ml-0.5 flex items-center gap-1">
-                                                    <span className="material-symbols-outlined notranslate !text-[10px]">error</span> {errors.telefono}
-                                                </p>}
-                                            </div>
+                                            )}
                                         </div>
                                     </div>
 
@@ -371,11 +376,13 @@ const CartDrawer = ({ isOpen, onClose, cart, onUpdateQuantity, onRemoveItem }) =
                                     <div className="bg-light/50 dark:bg-slate-900/30 p-5 border border-gold/10 rounded-sm space-y-5">
                                         <div className="flex items-center gap-2 mb-2">
                                             <span className="material-symbols-outlined notranslate text-gold !text-lg">person</span>
-                                            <h3 className="text-[0.75rem] uppercase tracking-[0.2em] text-dark dark:text-gold-light font-bold">Datos del Destinatario</h3>
+                                            <h3 className="text-[0.75rem] uppercase tracking-[0.2em] text-dark dark:text-gold-light font-bold">
+                                                {deliveryType === 'chilexpress' ? 'Datos del Destinatario' : '¿Quién retira el pedido?'}
+                                            </h3>
                                         </div>
 
                                         <div className="space-y-4">
-                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            <div className={`grid grid-cols-1 ${deliveryType === 'chilexpress' ? 'md:grid-cols-2' : ''} gap-4`}>
                                                 <div className="space-y-1.5">
                                                     <label className="text-[0.65rem] uppercase tracking-wider text-mid dark:text-slate-400 ml-0.5">Nombre Completo <span className="text-red-500">*</span></label>
                                                     <input
@@ -391,17 +398,19 @@ const CartDrawer = ({ isOpen, onClose, cart, onUpdateQuantity, onRemoveItem }) =
                                                     </p>}
                                                 </div>
 
-                                                <div className="space-y-1.5">
-                                                    <label className="text-[0.65rem] uppercase tracking-wider text-mid dark:text-slate-400 ml-0.5">RUT <span className="text-gold/60 font-light italic">(Opcional)</span></label>
-                                                    <input
-                                                        type="text"
-                                                        name="rut"
-                                                        value={formData.rut}
-                                                        onChange={handleInputChange}
-                                                        className="w-full bg-white dark:bg-slate-800 border border-gold/20 p-3.5 text-sm focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/20 transition-all text-dark dark:text-white rounded-none shadow-sm"
-                                                        placeholder="12.345.678-9"
-                                                    />
-                                                </div>
+                                                {deliveryType === 'chilexpress' && (
+                                                    <div className="space-y-1.5 animate-fade-in">
+                                                        <label className="text-[0.65rem] uppercase tracking-wider text-mid dark:text-slate-400 ml-0.5">RUT <span className="text-gold/60 font-light italic">(Opcional)</span></label>
+                                                        <input
+                                                            type="text"
+                                                            name="rut"
+                                                            value={formData.rut}
+                                                            onChange={handleInputChange}
+                                                            className="w-full bg-white dark:bg-slate-800 border border-gold/20 p-3.5 text-sm focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/20 transition-all text-dark dark:text-white rounded-none shadow-sm"
+                                                            placeholder="12.345.678-9"
+                                                        />
+                                                    </div>
+                                                )}
                                             </div>
 
                                             {deliveryType === 'chilexpress' && (
@@ -474,17 +483,19 @@ const CartDrawer = ({ isOpen, onClose, cart, onUpdateQuantity, onRemoveItem }) =
                                                 </div>
                                             )}
 
-                                            <div className="space-y-1.5">
-                                                <label className="text-[0.65rem] uppercase tracking-wider text-mid dark:text-slate-400 ml-0.5">Notas adicionales</label>
-                                                <textarea
-                                                    name="notas"
-                                                    value={formData.notas}
-                                                    onChange={handleInputChange}
-                                                    rows="2"
-                                                    className="w-full bg-white dark:bg-slate-800 border border-gold/20 p-3.5 text-sm focus:outline-none focus:border-gold transition-all text-dark dark:text-white resize-none rounded-none shadow-sm"
-                                                    placeholder="Ej: Portón café, llamar antes de llegar..."
-                                                />
-                                            </div>
+                                            {deliveryType === 'chilexpress' && (
+                                                <div className="space-y-1.5">
+                                                    <label className="text-[0.65rem] uppercase tracking-wider text-mid dark:text-slate-400 ml-0.5">Notas adicionales</label>
+                                                    <textarea
+                                                        name="notas"
+                                                        value={formData.notas}
+                                                        onChange={handleInputChange}
+                                                        rows="2"
+                                                        className="w-full bg-white dark:bg-slate-800 border border-gold/20 p-3.5 text-sm focus:outline-none focus:border-gold transition-all text-dark dark:text-white resize-none rounded-none shadow-sm"
+                                                        placeholder="Ej: Portón café, llamar antes de llegar..."
+                                                    />
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
                                 </div>
@@ -610,25 +621,37 @@ const CartDrawer = ({ isOpen, onClose, cart, onUpdateQuantity, onRemoveItem }) =
                             </div>
                         </div>
 
-                        {currentStep === 3 ? (
-                            <button
-                                onClick={handleCheckout}
-                                disabled={isProcessingPayment}
-                                className={`w-full ${isProcessingPayment ? 'opacity-70 cursor-wait' : ''} bg-dark dark:bg-gold text-gold-light dark:text-white py-4 font-sans text-[0.75rem] tracking-widest uppercase hover:bg-gold dark:hover:bg-white dark:hover:text-dark transition-all flex items-center justify-center gap-2`}
-                            >
-                                {isProcessingPayment ? 'PROCESANDO...' : (paymentMethod === 'transfer' ? 'CONFIRMAR PEDIDO' : 'PAGAR DE FORMA SEGURA')}
-                                {!isProcessingPayment && <span className="material-symbols-outlined notranslate !text-sm">{paymentMethod === 'transfer' ? 'check_circle' : 'security'}</span>}
-                            </button>
-                        ) : (
-                            <button
-                                onClick={nextStep}
-                                disabled={isQuoting}
-                                className="w-full bg-dark dark:bg-gold text-gold-light dark:text-white py-4 font-sans text-[0.75rem] tracking-widest uppercase hover:bg-gold dark:hover:bg-white dark:hover:text-dark transition-all flex items-center justify-center gap-2 group"
-                            >
-                                Siguiente
-                                <span className="material-symbols-outlined notranslate !text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
-                            </button>
-                        )}
+                        <div className="flex gap-3">
+                            {currentStep > 1 && (
+                                <button
+                                    onClick={prevStep}
+                                    className="flex-1 border border-gold/20 text-mid dark:text-slate-300 py-4 font-sans text-[0.75rem] tracking-widest uppercase hover:bg-gold/5 transition-all flex items-center justify-center gap-2"
+                                >
+                                    <span className="material-symbols-outlined notranslate !text-sm">arrow_back</span>
+                                    Volver
+                                </button>
+                            )}
+                            
+                            {currentStep === 3 ? (
+                                <button
+                                    onClick={handleCheckout}
+                                    disabled={isProcessingPayment}
+                                    className={`${currentStep > 1 ? 'flex-[2]' : 'w-full'} ${isProcessingPayment ? 'opacity-70 cursor-wait' : ''} bg-dark dark:bg-gold text-gold-light dark:text-white py-4 font-sans text-[0.75rem] tracking-widest uppercase hover:bg-gold dark:hover:bg-white dark:hover:text-dark transition-all flex items-center justify-center gap-2`}
+                                >
+                                    {isProcessingPayment ? 'PROCESANDO...' : (paymentMethod === 'transfer' ? 'CONFIRMAR PEDIDO' : 'PAGAR DE FORMA SEGURA')}
+                                    {!isProcessingPayment && <span className="material-symbols-outlined notranslate !text-sm">{paymentMethod === 'transfer' ? 'check_circle' : 'security'}</span>}
+                                </button>
+                            ) : (
+                                <button
+                                    onClick={nextStep}
+                                    disabled={isQuoting}
+                                    className="flex-[2] bg-dark dark:bg-gold text-gold-light dark:text-white py-4 font-sans text-[0.75rem] tracking-widest uppercase hover:bg-gold dark:hover:bg-white dark:hover:text-dark transition-all flex items-center justify-center gap-2 group"
+                                >
+                                    Siguiente
+                                    <span className="material-symbols-outlined notranslate !text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                                </button>
+                            )}
+                        </div>
 
                         {/* Botón Seguir Comprando para Mobile UX */}
                         <button

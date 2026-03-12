@@ -280,7 +280,7 @@ const Footer = () => (
       <div>
         <h5 className="text-[0.65rem] tracking-widest uppercase text-gold-light font-normal mb-6">Información</h5>
         <ul className="space-y-3 text-[0.82rem]">
-          {['Sobre Nosotras', 'Blog', 'Cuidado de Joyas', 'Certificaciones'].map(item => (
+          {['Sobre Nosotras', 'Blog'].map(item => (
             <li key={item}><a href="#" className="hover:text-gold-light transition-colors">{item}</a></li>
           ))}
         </ul>
@@ -289,10 +289,7 @@ const Footer = () => (
       <div>
         <h5 className="text-[0.65rem] tracking-widest uppercase text-gold-light font-normal mb-6">Ayuda</h5>
         <ul className="space-y-3 text-[0.82rem]">
-          {['Envíos y Devoluciones', 'Preguntas Frecuentes', 'Contacto'].map(item => (
-            <li key={item}><a href="#" className="hover:text-gold-light transition-colors">{item}</a></li>
-          ))}
-          <li><a href="https://wa.me/56966791895" target="_blank" rel="noopener noreferrer" className="hover:text-gold-light transition-colors">WhatsApp</a></li>
+          <li><a href="https://wa.me/56966791895" target="_blank" rel="noopener noreferrer" className="hover:text-gold-light transition-colors">Contacto vía WhatsApp</a></li>
         </ul>
       </div>
     </div>
@@ -324,6 +321,7 @@ const WhatsAppButton = () => (
 
 const SuccessPage = () => {
   const [hasNotified, setHasNotified] = React.useState(false);
+  const [paymentMethod, setPaymentMethod] = React.useState('mercadopago');
 
   React.useEffect(() => {
     const notifySale = async () => {
@@ -332,16 +330,22 @@ const SuccessPage = () => {
         const cartData = JSON.parse(localStorage.getItem('last_cart') || '[]');
         const payerData = JSON.parse(localStorage.getItem('last_payer') || '{}');
         const shippingCost = Number(localStorage.getItem('last_shipping') || '0');
+        const method = localStorage.getItem('last_payment_method') || 'mercadopago';
+        
+        setPaymentMethod(method);
 
         if (cartData.length > 0) {
           await fetch('/api/notify-success', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ items: cartData, payer: payerData, shippingCost })
+            body: JSON.stringify({ 
+              items: cartData, 
+              payer: payerData, 
+              shippingCost,
+              paymentMethod: method 
+            })
           });
           setHasNotified(true);
-          // Opcional: limpiar localStorage
-          // localStorage.removeItem('last_cart');
         }
       } catch (err) {
         console.error('Error matching success notification:', err);
@@ -350,18 +354,45 @@ const SuccessPage = () => {
     notifySale();
   }, [hasNotified]);
 
+  const isTransfer = paymentMethod === 'transfer';
+
   return (
     <div className="min-h-screen bg-light dark:bg-dark flex flex-col items-center justify-center p-6 text-center">
-      <div className="w-20 h-20 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mb-6">
-        <span className="material-symbols-outlined notranslate text-green-600 !text-4xl">check_circle</span>
+      <div className={`w-20 h-20 ${isTransfer ? 'bg-gold/10' : 'bg-green-100 dark:bg-green-900/30'} rounded-full flex items-center justify-center mb-8 animate-fade-in`}>
+        <span className={`material-symbols-outlined notranslate ${isTransfer ? 'text-gold' : 'text-green-600'} !text-5xl`}>
+          {isTransfer ? 'pending_actions' : 'check_circle'}
+        </span>
       </div>
-      <h1 className="font-serif text-4xl text-dark dark:text-white mb-4">¡Gracias por tu compra!</h1>
-      <p className="text-mid dark:text-slate-400 max-w-md mb-8">
-        Tu pedido ha sido procesado con éxito. Pronto recibirás un correo con los detalles de tu envío por Chilexpress.
-      </p>
-      <Link to="/" className="bg-gold text-white px-8 py-3 font-sans text-xs tracking-widest uppercase hover:bg-[#a0804f] transition-all">
-        Volver al Inicio
-      </Link>
+      
+      <h1 className="font-serif text-4xl md:text-5xl text-dark dark:text-white mb-6 animate-slide-in">
+        {isTransfer ? '¡Pedido Registrado!' : '¡Gracias por tu compra!'}
+      </h1>
+
+      <div className="max-w-xl bg-white dark:bg-[#1a1714] border border-gold/20 p-8 md:p-10 shadow-xl rounded-sm mb-10 animate-fade-in">
+        {isTransfer ? (
+          <p className="text-mid dark:text-slate-300 text-lg leading-relaxed font-light italic">
+            "¡Gracias por tu compra! Tu pedido ha sido registrado. <br /><br />
+            Quedamos a la espera de la recepción del comprobante de transferencia a nuestro correo. 
+            Una vez validado, confirmaremos tu compra y coordinaremos la entrega de acuerdo a la opción de despacho o retiro que seleccionaste."
+          </p>
+        ) : (
+          <p className="text-mid dark:text-slate-300 text-lg leading-relaxed font-light">
+            Tu pedido ha sido procesado con éxito. Pronto recibirás un correo con los detalles de tu envío y la confirmación de tu pago.
+          </p>
+        )}
+      </div>
+
+      <div className="flex flex-col sm:flex-row gap-4 animate-fade-in delay-300">
+        <Link to="/" className="bg-dark dark:bg-gold text-white px-10 py-4 font-sans text-xs tracking-[0.2em] uppercase hover:bg-gold dark:hover:bg-white dark:hover:text-dark transition-all shadow-lg hover:-translate-y-0.5">
+          Volver al Inicio
+        </Link>
+        {isTransfer && (
+          <a href="https://wa.me/56966791895" target="_blank" rel="noopener noreferrer" className="bg-[#25D366] text-white px-10 py-4 font-sans text-xs tracking-[0.2em] uppercase hover:bg-[#1da851] transition-all shadow-lg hover:-translate-y-0.5 flex items-center justify-center gap-2">
+            Enviar Comprobante
+            <span className="material-symbols-outlined notranslate !text-sm">send</span>
+          </a>
+        )}
+      </div>
     </div>
   );
 };
