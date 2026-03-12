@@ -156,8 +156,12 @@ const CartDrawer = ({ isOpen, onClose, cart, onUpdateQuantity, onRemoveItem }) =
                                 {currentStep === 1 ? 'Mi Bolsa' : currentStep === 2 ? 'Datos de Despacho' : 'Confirmación'}
                             </h2>
                         </div>
-                        <button onClick={handleClose} className="p-2 hover:bg-gold-pale dark:hover:bg-slate-800 rounded-full transition-colors text-inherit">
-                            <span className="material-symbols-outlined notranslate">close</span>
+                        <button 
+                            onClick={handleClose} 
+                            className="p-2 transition-all text-dark dark:text-white hover:text-gold active:scale-95 flex items-center justify-center -mr-2"
+                            aria-label="Cerrar bolsa"
+                        >
+                            <span className="material-symbols-outlined notranslate !text-2xl font-light">close</span>
                         </button>
                     </div>
 
@@ -488,6 +492,14 @@ const CartDrawer = ({ isOpen, onClose, cart, onUpdateQuantity, onRemoveItem }) =
                                 <span className="material-symbols-outlined notranslate !text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
                             </button>
                         )}
+
+                        {/* Botón Seguir Comprando para Mobile UX */}
+                        <button
+                            onClick={handleClose}
+                            className="w-full py-2 text-[0.65rem] uppercase tracking-[0.2em] text-mid dark:text-slate-400 hover:text-gold transition-colors font-sans font-medium"
+                        >
+                            Seguir comprando
+                        </button>
                     </div>
                 )}
             </div>
