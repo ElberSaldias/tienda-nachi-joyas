@@ -169,7 +169,7 @@ export const products = [
         price: 14990,
         image: "/products/pulseras/P002_blanco.jpg",
         tag: null,
-        stock: 1
+        stock: 0
     },
     {
         id: 18,
