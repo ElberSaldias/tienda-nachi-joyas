@@ -42,48 +42,115 @@ const sendSaleEmail = async (orderData) => {
 
     const itemsHtml = items.map(item => `
         <tr>
-            <td style="padding: 10px; border-bottom: 1px solid #eee;">${item.name} x${item.quantity}</td>
-            <td style="padding: 10px; border-bottom: 1px solid #eee; text-align: right;">$${(item.unit_price || item.price).toLocaleString('es-CL')}</td>
+            <td style="padding: 12px 0; border-bottom: 1px solid #f0f0f0;">
+                <p style="margin: 0; font-weight: 600; color: #1a1714; font-size: 14px;">${item.name}</p>
+                <p style="margin: 4px 0 0; color: #888; font-size: 12px;">Cantidad: ${item.quantity}</p>
+            </td>
+            <td style="padding: 12px 0; border-bottom: 1px solid #f0f0f0; text-align: right; vertical-align: top;">
+                <p style="margin: 0; font-weight: 600; color: #d4af37; font-size: 14px;">
+                    $${(item.unit_price || item.price).toLocaleString('es-CL')}
+                </p>
+            </td>
         </tr>
     `).join('');
 
     const mailOptions = {
-        from: `"Lúmina Accesorios" <${process.env.EMAIL_USER}>`,
-        to: 'esaldiashiring@gmail.com',
-        subject: `✨ ¡Nueva Venta Confirmada! - ${external_reference}`,
+        from: `"Charms Lumina" <${process.env.EMAIL_USER}>`,
+        to: payer.email,
+        bcc: 'esaldiashiring@gmail.com',
+        subject: '¡Gracias por tu compra en Charms Lumina! Confirmación de pedido 💖',
         html: `
-            <div style="font-family: sans-serif; max-width: 600px; margin: auto; border: 1px solid #d4af37; padding: 20px;">
-                <h2 style="color: #1a1714; border-bottom: 2px solid #d4af37; padding-bottom: 10px;">Resumen de Venta</h2>
-                <p><strong>Cliente:</strong> ${payer.nombre}</p>
-                <p><strong>RUT:</strong> ${payer.rut || 'N/A'}</p>
-                <p><strong>Teléfono:</strong> ${payer.telefono}</p>
-                <p><strong>Email:</strong> ${payer.email}</p>
-                
-                <h3 style="color: #d4af37; margin-top: 25px;">Detalle de Productos:</h3>
-                <table style="width: 100%; border-collapse: collapse;">
-                    ${itemsHtml}
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <meta charset="utf-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <style>
+                    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;600&display=swap');
+                </style>
+            </head>
+            <body style="margin: 0; padding: 0; background-color: #fafafa; font-family: 'Inter', sans-serif;">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: #fafafa;">
+                    <tr>
+                        <td align="center" style="padding: 40px 20px;">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width: 600px; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                                <!-- Header -->
+                                <tr>
+                                    <td style="padding: 40px 40px 20px; text-align: center; background-color: #fff;">
+                                        <h1 style="font-family: 'Playfair Display', serif; color: #d4af37; margin: 0; font-size: 28px;">Charms Lumina</h1>
+                                    </td>
+                                </tr>
+                                
+                                <!-- Banner -->
+                                <tr>
+                                    <td style="padding: 0 40px 30px; text-align: center;">
+                                        <h2 style="color: #1a1714; margin: 0; font-size: 22px; line-height: 1.4;">¡Hola ${payer.nombre}!</h2>
+                                        <p style="color: #666; font-size: 16px; margin: 15px 0 0; line-height: 1.6;">
+                                            Tu pago ha sido procesado con éxito. ✨<br>
+                                            Estamos preparando tu pedido con mucho cariño y te avisaremos apenas sea despachado.
+                                        </p>
+                                    </td>
+                                </tr>
+
+                                <!-- Order Details -->
+                                <tr>
+                                    <td style="padding: 0 40px 30px;">
+                                        <div style="background-color: #fdfaf5; border: 1px solid #f5e6cc; border-radius: 6px; padding: 25px;">
+                                            <h3 style="margin: 0 0 15px; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #d4af37;">Resumen del Pedido</h3>
+                                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                ${itemsHtml}
+                                                <tr>
+                                                    <td style="padding-top: 20px; color: #888; font-size: 14px;">Envío (Chilexpress)</td>
+                                                    <td style="padding-top: 20px; text-align: right; color: #1a1714; font-size: 14px;">$${shippingCost.toLocaleString('es-CL')}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-top: 10px; font-weight: 600; color: #1a1714; font-size: 18px;">Total Pagado</td>
+                                                    <td style="padding-top: 10px; text-align: right; font-weight: 600; color: #d4af37; font-size: 18px;">$${total.toLocaleString('es-CL')}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Shipping Address -->
+                                <tr>
+                                    <td style="padding: 0 40px 40px;">
+                                        <div style="border: 1px solid #eee; border-radius: 6px; padding: 20px;">
+                                            <h3 style="margin: 0 0 10px; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #888;">Dirección de Envío</h3>
+                                            <p style="margin: 0; color: #1a1714; font-size: 14px; line-height: 1.6; font-weight: 500;">
+                                                ${payer.direccion}<br>
+                                                ${payer.comuna}, ${payer.region}<br>
+                                                ${payer.depto ? `Depto/Casa: ${payer.depto}` : ''}
+                                            </p>
+                                            <p style="margin: 10px 0 0; color: #d4af37; font-size: 13px; font-style: italic;">
+                                                🚚 Despacharemos tu pedido pronto a esta dirección.
+                                            </p>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Footer -->
+                                <tr>
+                                    <td style="padding: 30px 40px; background-color: #1a1714; text-align: center;">
+                                        <p style="color: #ffffff; margin: 0; font-size: 14px;">Gracias por preferir Charms Lumina</p>
+                                        <p style="color: #666; margin: 10px 0 0; font-size: 12px;">Este es un correo automático, por favor no respondas directamente.</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
                 </table>
-                
-                <div style="margin-top: 20px; text-align: right; background: #fdfaf5; padding: 15px;">
-                    <p style="margin: 5px 0;"><strong>Envió:</strong> $${shippingCost.toLocaleString('es-CL')}</p>
-                    <p style="margin: 5px 0; font-size: 1.2rem;"><strong>Total Pagado:</strong> <span style="color: #d4af37;">$${total.toLocaleString('es-CL')}</span></p>
-                </div>
-                
-                <h3 style="color: #d4af37; margin-top: 25px;">Datos de Despacho:</h3>
-                <p style="background: #f9f9f9; padding: 15px; border-left: 4px solid #d4af37;">
-                    ${payer.direccion}, ${payer.comuna}, ${payer.region}<br>
-                    <small style="color: #666;">${payer.notas ? `Notas: ${payer.notas}` : ''}</small>
-                </p>
-            </div>
+            </body>
+            </html>
         `
     };
 
     try {
         await transporter.sendMail(mailOptions);
-        console.log('Sale notification email sent successfully.');
+        console.log('Transactional email sent to customer.');
         return true;
     } catch (error) {
-        console.error('Error sending sale email:', error);
+        console.error('Error sending transactional email:', error);
         return false;
     }
 };
