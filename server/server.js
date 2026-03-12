@@ -154,15 +154,15 @@ app.post('/api/checkout', async (req, res) => {
             // Si el stock viene en el objeto (enviado por el frontend)
             // Validamos que la cantidad pedida no supere el stock disponible.
             if (item.stock !== undefined && item.quantity > item.stock) {
-                return res.status(400).json({ 
-                    error: `Stock insuficiente para ${item.name}. Disponible: ${item.stock}` 
+                return res.status(400).json({
+                    error: `Stock insuficiente para ${item.name}. Disponible: ${item.stock}`
                 });
             }
         }
 
         const preference = new Preference(client);
         const externalReference = `ORDER-${Date.now()}`;
-        
+
         const preferenceData = {
             body: {
                 items: items.map(p => ({
@@ -247,15 +247,19 @@ app.get('/api/test-email', async (req, res) => {
 });
 
 const PORT = process.env.PORT || 3001;
-const server = app.listen(PORT, () => {
-    console.log('--- SERVER INITIALIZED ---');
-    console.log(`Server running on port ${PORT}`);
-    console.log('Event loop should be active...');
-});
+if (process.env.NODE_ENV !== 'production') {
+    const server = app.listen(PORT, () => {
+        console.log('--- SERVER INITIALIZED ---');
+        console.log(`Server running on port ${PORT}`);
+        console.log('Event loop should be active...');
+    });
 
-server.on('error', (error) => {
-    console.error('!!! SERVER ERROR EVENT:', error);
-});
+    server.on('error', (error) => {
+        console.error('!!! SERVER ERROR EVENT:', error);
+    });
+}
+
+module.exports = app;
 
 // Diagnostic listeners to catch early exits
 process.on('uncaughtException', (err) => {
