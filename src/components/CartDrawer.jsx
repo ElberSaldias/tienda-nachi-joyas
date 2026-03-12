@@ -162,7 +162,7 @@ const CartDrawer = ({ isOpen, onClose, cart, onUpdateQuantity, onRemoveItem }) =
             />
 
             {/* Drawer */}
-            <div className="relative w-full max-w-md bg-white dark:bg-dark h-screen shadow-2xl flex flex-col animate-slide-in">
+            <div className="relative w-full max-w-md bg-white dark:bg-dark h-[100dvh] shadow-2xl flex flex-col animate-slide-in">
                 {/* Header & Stepper */}
                 <div className="p-6 border-b border-gold/20">
                     <div className="flex items-center justify-between mb-6">
@@ -590,7 +590,7 @@ const CartDrawer = ({ isOpen, onClose, cart, onUpdateQuantity, onRemoveItem }) =
                 </div>
 
                 {cart.length > 0 && (
-                    <div className="p-6 bg-gold-pale/30 dark:bg-slate-900/50 border-t border-gold/20 space-y-4">
+                    <div className="p-6 pb-10 bg-gold-pale/30 dark:bg-slate-900/50 border-t border-gold/20 space-y-4 shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
                         <div className="space-y-2">
                             <div className="flex justify-between items-center text-xs text-mid dark:text-slate-400 uppercase tracking-widest">
                                 <span>Subtotal:</span>
