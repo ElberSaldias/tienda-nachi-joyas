@@ -19,6 +19,8 @@ const CartDrawer = ({ isOpen, onClose, cart, onUpdateQuantity, onRemoveItem }) =
     const [shippingCost, setShippingCost] = useState(0);
     const [isQuoting, setIsQuoting] = useState(false);
     const [isProcessingPayment, setIsProcessingPayment] = useState(false);
+    const [deliveryType, setDeliveryType] = useState('chilexpress'); // 'chilexpress' or 'pickup'
+    const [paymentMethod, setPaymentMethod] = useState('mercadopago'); // 'mercadopago' or 'transfer'
 
     const totalProducts = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
     const total = totalProducts + shippingCost;
@@ -41,9 +43,18 @@ const CartDrawer = ({ isOpen, onClose, cart, onUpdateQuantity, onRemoveItem }) =
             setErrors(prev => ({ ...prev, [name]: '' }));
         }
 
-        // Auto-quote shipping when comuna changes
-        if (name === 'comuna' && value) {
+        // Auto-quote shipping when comuna changes, but only if delivery is chilexpress
+        if (name === 'comuna' && value && deliveryType === 'chilexpress') {
             fetchShippingQuote(value);
+        }
+    };
+
+    const handleDeliveryTypeChange = (type) => {
+        setDeliveryType(type);
+        if (type === 'pickup') {
+            setShippingCost(0);
+        } else if (formData.comuna) {
+            fetchShippingQuote(formData.comuna);
         }
     };
 
@@ -71,8 +82,11 @@ const CartDrawer = ({ isOpen, onClose, cart, onUpdateQuantity, onRemoveItem }) =
         if (!formData.telefono.trim()) newErrors.telefono = 'El teléfono es obligatorio';
         if (!formData.email.trim()) newErrors.email = 'El email es obligatorio';
         else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Email inválido';
-        if (!formData.direccion.trim()) newErrors.direccion = 'La dirección es obligatoria';
-        if (!formData.comuna.trim()) newErrors.comuna = 'La comuna es obligatoria';
+        
+        if (deliveryType === 'chilexpress') {
+            if (!formData.direccion.trim()) newErrors.direccion = 'La dirección es obligatoria';
+            if (!formData.comuna.trim()) newErrors.comuna = 'La comuna es obligatoria';
+        }
 
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
@@ -99,21 +113,27 @@ const CartDrawer = ({ isOpen, onClose, cart, onUpdateQuantity, onRemoveItem }) =
                 body: JSON.stringify({
                     items: cart,
                     payer: formData,
-                    shippingCost: shippingCost
+                    shippingCost: shippingCost,
+                    deliveryType: deliveryType,
+                    paymentMethod: paymentMethod
                 })
             });
 
             const data = await response.json();
             
-            if (response.ok && data.init_point) {
-                // Guardamos los datos para que la página de éxito pueda enviar el correo
+            if (response.ok) {
+                // Guardamos los datos para que la página de éxito pueda enviar el correo (opcional si el backend ya lo hace)
                 localStorage.setItem('last_cart', JSON.stringify(cart));
                 localStorage.setItem('last_payer', JSON.stringify(formData));
                 localStorage.setItem('last_shipping', String(shippingCost));
                 
-                window.location.href = data.init_point;
+                if (paymentMethod === 'mercadopago' && data.init_point) {
+                    window.location.href = data.init_point;
+                } else if (paymentMethod === 'transfer') {
+                    window.location.href = '/success';
+                }
             } else {
-                alert(data.error || 'Error al generar el pago');
+                alert(data.error || 'Error al generar el pedido');
             }
         } catch (error) {
             console.error('Error creating payment preference:', error);
@@ -290,11 +310,68 @@ const CartDrawer = ({ isOpen, onClose, cart, onUpdateQuantity, onRemoveItem }) =
                                         </div>
                                     </div>
 
-                                    {/* SECCIÓN 2: DIRECCIÓN DE DESPACHO */}
+                                    {/* SECCIÓN 2: TIPO DE ENTREGA */}
                                     <div className="bg-light/50 dark:bg-slate-900/30 p-5 border border-gold/10 rounded-sm space-y-5">
                                         <div className="flex items-center gap-2 mb-2">
-                                            <span className="material-symbols-outlined notranslate text-gold !text-lg">local_shipping</span>
-                                            <h3 className="text-[0.75rem] uppercase tracking-[0.2em] text-dark dark:text-gold-light font-bold">Dirección de Envío</h3>
+                                            <span className="material-symbols-outlined notranslate text-gold !text-lg">handyman</span>
+                                            <h3 className="text-[0.75rem] uppercase tracking-[0.2em] text-dark dark:text-gold-light font-bold">Tipo de Entrega</h3>
+                                        </div>
+
+                                        <div className="space-y-3">
+                                            <label 
+                                                className={`flex items-center gap-3 p-4 border transition-all cursor-pointer ${deliveryType === 'chilexpress' ? 'border-gold bg-gold/5' : 'border-gold/10 hover:border-gold/30'}`}
+                                                onClick={() => handleDeliveryTypeChange('chilexpress')}
+                                            >
+                                                <input 
+                                                    type="radio" 
+                                                    name="deliveryType" 
+                                                    checked={deliveryType === 'chilexpress'} 
+                                                    onChange={() => {}} 
+                                                    className="accent-gold h-4 w-4"
+                                                />
+                                                <div className="flex-1">
+                                                    <p className="text-sm font-medium text-dark dark:text-white">Envío a domicilio</p>
+                                                    <p className="text-[0.7rem] text-mid dark:text-slate-400">Vía Chilexpress (Despacho estándar)</p>
+                                                </div>
+                                            </label>
+
+                                            <label 
+                                                className={`flex items-center gap-3 p-4 border transition-all cursor-pointer ${deliveryType === 'pickup' ? 'border-gold bg-gold/5' : 'border-gold/10 hover:border-gold/30'}`}
+                                                onClick={() => handleDeliveryTypeChange('pickup')}
+                                            >
+                                                <input 
+                                                    type="radio" 
+                                                    name="deliveryType" 
+                                                    checked={deliveryType === 'pickup'} 
+                                                    onChange={() => {}} 
+                                                    className="accent-gold h-4 w-4"
+                                                />
+                                                <div className="flex-1">
+                                                    <p className="text-sm font-medium text-dark dark:text-white">Retiro en punto de entrega</p>
+                                                    <p className="text-[0.7rem] text-mid dark:text-slate-400">Costo $0 - La Florida, RM</p>
+                                                </div>
+                                            </label>
+
+                                            {deliveryType === 'pickup' && (
+                                                <div className="mt-4 p-4 bg-gold-pale/20 border border-gold/20 rounded-sm animate-fade-in">
+                                                    <div className="flex gap-2 text-gold mb-2">
+                                                        <span className="material-symbols-outlined notranslate !text-lg">location_on</span>
+                                                        <p className="text-[0.7rem] font-bold uppercase tracking-wider">Dirección de Retiro:</p>
+                                                    </div>
+                                                    <p className="text-sm text-dark dark:text-white leading-relaxed">
+                                                        Froilan Roa 6727, Comuna de La Florida<br/>
+                                                        <span className="text-[0.8rem] text-mid dark:text-slate-400">(Cercano a Mall Plaza Vespucio)</span>
+                                                    </p>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+
+                                    {/* SECCIÓN 3: DIRECCIÓN DE DESPACHO (Solo si es domicilio) */}
+                                    <div className="bg-light/50 dark:bg-slate-900/30 p-5 border border-gold/10 rounded-sm space-y-5">
+                                        <div className="flex items-center gap-2 mb-2">
+                                            <span className="material-symbols-outlined notranslate text-gold !text-lg">person</span>
+                                            <h3 className="text-[0.75rem] uppercase tracking-[0.2em] text-dark dark:text-gold-light font-bold">Datos del Destinatario</h3>
                                         </div>
 
                                         <div className="space-y-4">
@@ -327,71 +404,75 @@ const CartDrawer = ({ isOpen, onClose, cart, onUpdateQuantity, onRemoveItem }) =
                                                 </div>
                                             </div>
 
-                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                                <div className="space-y-1.5">
-                                                    <label className="text-[0.65rem] uppercase tracking-wider text-mid dark:text-slate-400 ml-0.5">Región <span className="text-red-500">*</span></label>
-                                                    <div className="relative">
-                                                        <select
-                                                            name="region"
-                                                            value={formData.region}
-                                                            onChange={handleInputChange}
-                                                            className="w-full bg-white dark:bg-slate-800 border border-gold/20 p-3.5 pr-10 text-sm focus:outline-none focus:border-gold transition-colors text-dark dark:text-white appearance-none rounded-none"
-                                                        >
-                                                            {regions.map(r => <option key={r} value={r}>{r}</option>)}
-                                                        </select>
-                                                        <span className="material-symbols-outlined notranslate absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-gold/60 !text-lg">expand_more</span>
+                                            {deliveryType === 'chilexpress' && (
+                                                <div className="space-y-4 animate-fade-in">
+                                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                        <div className="space-y-1.5">
+                                                            <label className="text-[0.65rem] uppercase tracking-wider text-mid dark:text-slate-400 ml-0.5">Región <span className="text-red-500">*</span></label>
+                                                            <div className="relative">
+                                                                <select
+                                                                    name="region"
+                                                                    value={formData.region}
+                                                                    onChange={handleInputChange}
+                                                                    className="w-full bg-white dark:bg-slate-800 border border-gold/20 p-3.5 pr-10 text-sm focus:outline-none focus:border-gold transition-colors text-dark dark:text-white appearance-none rounded-none"
+                                                                >
+                                                                    {regions.map(r => <option key={r} value={r}>{r}</option>)}
+                                                                </select>
+                                                                <span className="material-symbols-outlined notranslate absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-gold/60 !text-lg">expand_more</span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="space-y-1.5">
+                                                            <label className="text-[0.65rem] uppercase tracking-wider text-mid dark:text-slate-400 ml-0.5">Comuna <span className="text-red-500">*</span></label>
+                                                            <div className="relative">
+                                                                <select
+                                                                    name="comuna"
+                                                                    value={formData.comuna}
+                                                                    onChange={handleInputChange}
+                                                                    className={`w-full bg-white dark:bg-slate-800 border ${errors.comuna ? 'border-red-500' : 'border-gold/20'} p-3.5 pr-10 text-sm focus:outline-none focus:border-gold transition-colors text-dark dark:text-white appearance-none rounded-none`}
+                                                                >
+                                                                    <option value="">Seleccionar...</option>
+                                                                    {communesByRegion[formData.region]?.map(c => (
+                                                                        <option key={c} value={c}>{c}</option>
+                                                                    ))}
+                                                                </select>
+                                                                <span className="material-symbols-outlined notranslate absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-gold/60 !text-lg">expand_more</span>
+                                                            </div>
+                                                            {errors.comuna && <p className="text-red-500 text-[0.6rem] mt-1 ml-0.5 flex items-center gap-1">
+                                                                <span className="material-symbols-outlined notranslate !text-[10px]">error</span> {errors.comuna}
+                                                            </p>}
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                                        <div className="md:col-span-2 space-y-1.5">
+                                                            <label className="text-[0.65rem] uppercase tracking-wider text-mid dark:text-slate-400 ml-0.5">Calle y Número <span className="text-red-500">*</span></label>
+                                                            <input
+                                                                type="text"
+                                                                name="direccion"
+                                                                value={formData.direccion}
+                                                                onChange={handleInputChange}
+                                                                className={`w-full bg-white dark:bg-slate-800 border ${errors.direccion ? 'border-red-500' : 'border-gold/20'} p-3.5 text-sm focus:outline-none focus:border-gold transition-all text-dark dark:text-white rounded-none shadow-sm`}
+                                                                placeholder="Av. Providencia 1234"
+                                                            />
+                                                            {errors.direccion && <p className="text-red-500 text-[0.6rem] mt-1 ml-0.5 flex items-center gap-1">
+                                                                <span className="material-symbols-outlined notranslate !text-[10px]">error</span> {errors.direccion}
+                                                            </p>}
+                                                        </div>
+                                                        <div className="space-y-1.5">
+                                                            <label className="text-[0.65rem] uppercase tracking-wider text-mid dark:text-slate-400 ml-0.5">Depto / Casa</label>
+                                                            <input
+                                                                type="text"
+                                                                name="depto"
+                                                                value={formData.depto}
+                                                                onChange={handleInputChange}
+                                                                className="w-full bg-white dark:bg-slate-800 border border-gold/20 p-3.5 text-sm focus:outline-none focus:border-gold transition-all text-dark dark:text-white rounded-none shadow-sm"
+                                                                placeholder="Ej: 402B"
+                                                            />
+                                                        </div>
                                                     </div>
                                                 </div>
-
-                                                <div className="space-y-1.5">
-                                                    <label className="text-[0.65rem] uppercase tracking-wider text-mid dark:text-slate-400 ml-0.5">Comuna <span className="text-red-500">*</span></label>
-                                                    <div className="relative">
-                                                        <select
-                                                            name="comuna"
-                                                            value={formData.comuna}
-                                                            onChange={handleInputChange}
-                                                            className={`w-full bg-white dark:bg-slate-800 border ${errors.comuna ? 'border-red-500' : 'border-gold/20'} p-3.5 pr-10 text-sm focus:outline-none focus:border-gold transition-colors text-dark dark:text-white appearance-none rounded-none`}
-                                                        >
-                                                            <option value="">Seleccionar...</option>
-                                                            {communesByRegion[formData.region]?.map(c => (
-                                                                <option key={c} value={c}>{c}</option>
-                                                            ))}
-                                                        </select>
-                                                        <span className="material-symbols-outlined notranslate absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-gold/60 !text-lg">expand_more</span>
-                                                    </div>
-                                                    {errors.comuna && <p className="text-red-500 text-[0.6rem] mt-1 ml-0.5 flex items-center gap-1">
-                                                        <span className="material-symbols-outlined notranslate !text-[10px]">error</span> {errors.comuna}
-                                                    </p>}
-                                                </div>
-                                            </div>
-
-                                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                                <div className="md:col-span-2 space-y-1.5">
-                                                    <label className="text-[0.65rem] uppercase tracking-wider text-mid dark:text-slate-400 ml-0.5">Calle y Número <span className="text-red-500">*</span></label>
-                                                    <input
-                                                        type="text"
-                                                        name="direccion"
-                                                        value={formData.direccion}
-                                                        onChange={handleInputChange}
-                                                        className={`w-full bg-white dark:bg-slate-800 border ${errors.direccion ? 'border-red-500' : 'border-gold/20'} p-3.5 text-sm focus:outline-none focus:border-gold transition-all text-dark dark:text-white rounded-none shadow-sm`}
-                                                        placeholder="Av. Providencia 1234"
-                                                    />
-                                                    {errors.direccion && <p className="text-red-500 text-[0.6rem] mt-1 ml-0.5 flex items-center gap-1">
-                                                        <span className="material-symbols-outlined notranslate !text-[10px]">error</span> {errors.direccion}
-                                                    </p>}
-                                                </div>
-                                                <div className="space-y-1.5">
-                                                    <label className="text-[0.65rem] uppercase tracking-wider text-mid dark:text-slate-400 ml-0.5">Depto / Casa</label>
-                                                    <input
-                                                        type="text"
-                                                        name="depto"
-                                                        value={formData.depto}
-                                                        onChange={handleInputChange}
-                                                        className="w-full bg-white dark:bg-slate-800 border border-gold/20 p-3.5 text-sm focus:outline-none focus:border-gold transition-all text-dark dark:text-white rounded-none shadow-sm"
-                                                        placeholder="Ej: 402B"
-                                                    />
-                                                </div>
-                                            </div>
+                                            )}
 
                                             <div className="space-y-1.5">
                                                 <label className="text-[0.65rem] uppercase tracking-wider text-mid dark:text-slate-400 ml-0.5">Notas adicionales</label>
@@ -412,28 +493,84 @@ const CartDrawer = ({ isOpen, onClose, cart, onUpdateQuantity, onRemoveItem }) =
                             {currentStep === 3 && (
                                 <div className="space-y-8 animate-fade-in">
                                     <div className="bg-gold-pale/30 dark:bg-slate-900/40 p-5 border border-gold/10">
-                                        <h5 className="text-[0.65rem] uppercase tracking-widest text-gold mb-3 font-bold">Datos de Despacho</h5>
+                                        <h5 className="text-[0.65rem] uppercase tracking-widest text-gold mb-3 font-bold">Resumen de Despacho</h5>
                                         <div className="space-y-2 text-sm text-dark dark:text-white/80 font-light leading-relaxed">
-                                            <p className="flex justify-between font-normal"><span>Destinatario:</span> <span className="font-medium text-dark dark:text-white">{formData.nombre}</span></p>
-                                            <p className="flex justify-between"><span>Teléfono:</span> <span>+56 {formData.telefono}</span></p>
-                                            <p className="flex justify-between"><span>Comuna:</span> <span>{formData.comuna}</span></p>
-                                            <p className="flex justify-between"><span>Dirección:</span> <span className="text-right">{formData.direccion}{formData.depto ? `, Depto/Casa ${formData.depto}` : ''}</span></p>
-                                            {formData.notas && <p className="text-[0.7rem] italic border-t border-gold/5 pt-2 mt-2 leading-relaxed">"{formData.notas}"</p>}
+                                            <p className="flex justify-between font-normal"><span>Entrega:</span> <span className="font-medium text-dark dark:text-white">{deliveryType === 'chilexpress' ? 'Envío a Domicilio' : 'Retiro en Tienda'}</span></p>
+                                            <p className="flex justify-between"><span>Destinatario:</span> <span className="font-medium text-dark dark:text-white">{formData.nombre}</span></p>
+                                            {deliveryType === 'chilexpress' ? (
+                                                <>
+                                                    <p className="flex justify-between"><span>Comuna:</span> <span>{formData.comuna}</span></p>
+                                                    <p className="flex justify-between"><span>Dirección:</span> <span className="text-right">{formData.direccion}{formData.depto ? `, Depto/Casa ${formData.depto}` : ''}</span></p>
+                                                </>
+                                            ) : (
+                                                <p className="flex justify-between"><span>Lugar:</span> <span>La Florida, RM</span></p>
+                                            )}
                                         </div>
                                     </div>
 
                                     <div className="space-y-4">
-                                        <h5 className="text-[0.65rem] uppercase tracking-widest text-gold font-bold">Resumen del Pedido</h5>
-                                        <div className="space-y-3">
-                                            {cart.map(item => (
-                                                <div key={item.id} className="flex justify-between text-xs text-mid dark:text-slate-400">
-                                                    <span>{item.quantity}x {item.name}</span>
-                                                    <span className="text-dark dark:text-white font-medium">
-                                                        {new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP' }).format(item.price * item.quantity)}
-                                                    </span>
+                                        <h5 className="text-[0.65rem] uppercase tracking-widest text-gold font-bold">Método de Pago</h5>
+                                        <div className="grid grid-cols-1 gap-3">
+                                            <label 
+                                                className={`flex items-center gap-3 p-4 border transition-all cursor-pointer ${paymentMethod === 'mercadopago' ? 'border-gold bg-gold/5' : 'border-gold/10 hover:border-gold/30'}`}
+                                                onClick={() => setPaymentMethod('mercadopago')}
+                                            >
+                                                <input 
+                                                    type="radio" 
+                                                    name="paymentMethod" 
+                                                    checked={paymentMethod === 'mercadopago'} 
+                                                    onChange={() => {}} 
+                                                    className="accent-gold h-4 w-4"
+                                                />
+                                                <div className="flex-1 flex items-center justify-between">
+                                                    <div>
+                                                        <p className="text-sm font-medium text-dark dark:text-white">Mercado Pago</p>
+                                                        <p className="text-[0.7rem] text-mid dark:text-slate-400">Tarjetas de Débito/Crédito</p>
+                                                    </div>
+                                                    <span className="material-symbols-outlined notranslate text-gold">payments</span>
                                                 </div>
-                                            ))}
+                                            </label>
+
+                                            <label 
+                                                className={`flex items-center gap-3 p-4 border transition-all cursor-pointer ${paymentMethod === 'transfer' ? 'border-gold bg-gold/5' : 'border-gold/10 hover:border-gold/30'}`}
+                                                onClick={() => setPaymentMethod('transfer')}
+                                            >
+                                                <input 
+                                                    type="radio" 
+                                                    name="paymentMethod" 
+                                                    checked={paymentMethod === 'transfer'} 
+                                                    onChange={() => {}} 
+                                                    className="accent-gold h-4 w-4"
+                                                />
+                                                <div className="flex-1 flex items-center justify-between">
+                                                    <div>
+                                                        <p className="text-sm font-medium text-dark dark:text-white">Transferencia Bancaria</p>
+                                                        <p className="text-[0.7rem] text-mid dark:text-slate-400">Datos bancarios al finalizar</p>
+                                                    </div>
+                                                    <span className="material-symbols-outlined notranslate text-gold">account_balance</span>
+                                                </div>
+                                            </label>
                                         </div>
+
+                                        {paymentMethod === 'transfer' && (
+                                            <div className="mt-4 p-5 bg-white dark:bg-slate-900 border border-gold/30 rounded-sm shadow-xl animate-fade-in space-y-4">
+                                                <div className="flex items-center gap-2 border-b border-gold/10 pb-2">
+                                                    <span className="material-symbols-outlined notranslate text-gold">info</span>
+                                                    <h6 className="text-[0.7rem] uppercase tracking-widest text-dark dark:text-gold-light font-bold">Datos para Transferencia</h6>
+                                                </div>
+                                                <div className="grid grid-cols-1 gap-2.5 text-[0.8rem]">
+                                                    <div className="flex justify-between"><span className="text-mid dark:text-slate-500">Nombre:</span> <span className="font-medium dark:text-white">Paula Poblete Falabella</span></div>
+                                                    <div className="flex justify-between"><span className="text-mid dark:text-slate-500">RUT:</span> <span className="font-medium dark:text-white">16.554.976-7</span></div>
+                                                    <div className="flex justify-between"><span className="text-mid dark:text-slate-500">Banco:</span> <span className="font-medium dark:text-white">Banco Falabella</span></div>
+                                                    <div className="flex justify-between"><span className="text-mid dark:text-slate-500">Tipo de Cuenta:</span> <span className="font-medium dark:text-white">Corriente</span></div>
+                                                    <div className="flex justify-between"><span className="text-mid dark:text-slate-500">Nº de Cuenta:</span> <span className="font-medium text-gold-light font-bold">15040258400</span></div>
+                                                    <div className="flex justify-between"><span className="text-mid dark:text-slate-500">Email:</span> <span className="font-medium dark:text-white">paulyta.pf@gmail.com</span></div>
+                                                </div>
+                                                <div className="bg-gold/5 p-3 text-[0.7rem] italic text-mid dark:text-slate-400 leading-relaxed rounded-sm border-l-2 border-gold">
+                                                    Por favor, envía el comprobante al correo indicado para procesar tu pedido.
+                                                </div>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                             )}
@@ -479,8 +616,8 @@ const CartDrawer = ({ isOpen, onClose, cart, onUpdateQuantity, onRemoveItem }) =
                                 disabled={isProcessingPayment}
                                 className={`w-full ${isProcessingPayment ? 'opacity-70 cursor-wait' : ''} bg-dark dark:bg-gold text-gold-light dark:text-white py-4 font-sans text-[0.75rem] tracking-widest uppercase hover:bg-gold dark:hover:bg-white dark:hover:text-dark transition-all flex items-center justify-center gap-2`}
                             >
-                                {isProcessingPayment ? 'PROCESANDO...' : 'PAGAR DE FORMA SEGURA'}
-                                {!isProcessingPayment && <span className="material-symbols-outlined notranslate !text-sm">security</span>}
+                                {isProcessingPayment ? 'PROCESANDO...' : (paymentMethod === 'transfer' ? 'CONFIRMAR PEDIDO' : 'PAGAR DE FORMA SEGURA')}
+                                {!isProcessingPayment && <span className="material-symbols-outlined notranslate !text-sm">{paymentMethod === 'transfer' ? 'check_circle' : 'security'}</span>}
                             </button>
                         ) : (
                             <button

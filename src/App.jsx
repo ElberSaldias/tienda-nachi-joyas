@@ -450,7 +450,7 @@ function StoreFront({
           <div className="max-w-2xl">
             <h2 className="font-serif text-4xl md:text-5xl font-light text-dark dark:text-white mb-4">Catálogo de Joyas</h2>
             <p className="text-mid dark:text-slate-400 text-[0.92rem] font-light leading-loose">
-              Piezas exclusivas diseñadas para resaltar tu elegancia natural. Plata y piedras preciosas que perduran en el tiempo.
+              Piezas exclusivas diseñadas para resaltar tu elegancia natural.
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-6">
