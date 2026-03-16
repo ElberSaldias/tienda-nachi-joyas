@@ -18,7 +18,7 @@ export const products = [
         price: 7990,
         image: "/products/dijes/002_blanco.jpg",
         tag: null,
-        stock: 1
+        stock: 0
     },
     {
         id: 3,
@@ -68,7 +68,7 @@ export const products = [
         price: 7990,
         image: "/products/dijes/007_blanco.jpg",
         tag: null,
-        stock: 1
+        stock: 0
     },
     {
         id: 8,
@@ -88,7 +88,7 @@ export const products = [
         price: 7990,
         image: "/products/dijes/009_blanco.jpg",
         tag: null,
-        stock: 1
+        stock: 0
     },
     {
         id: 10,
@@ -128,7 +128,7 @@ export const products = [
         price: 7990,
         image: "/products/dijes/013_blanco.jpg",
         tag: null,
-        stock: 1
+        stock: 0
     },
     {
         id: 14,
@@ -138,7 +138,7 @@ export const products = [
         price: 7990,
         image: "/products/dijes/014_blanco.jpg",
         tag: null,
-        stock: 1
+        stock: 0
     },
     {
         id: 15,
@@ -229,7 +229,7 @@ export const products = [
         price: 14990,
         image: "/products/pulseras/P008_blanco.jpg",
         tag: null,
-        stock: 1
+        stock: 0
     },
     {
         id: 24,

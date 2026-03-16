@@ -188,8 +188,8 @@ const ProductCard = ({ product, isFavorite, onToggleFavorite, onAddToCart, isSto
         className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 ${product.stock === 0 ? 'grayscale opacity-70' : ''}`}
       />
       {product.stock === 0 ? (
-        <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-red-600/90 text-white text-[0.6rem] tracking-widest uppercase px-4 py-1.5 z-20 font-bold shadow-xl">
-          Agotado
+        <span className="absolute top-2.5 left-2.5 bg-red-600 text-white text-[0.55rem] tracking-widest uppercase px-2 py-0.5 z-20 font-bold shadow-sm">
+          AGOTADO
         </span>
       ) : product.tag && (
         <span className="absolute top-2.5 left-2.5 bg-dark dark:bg-gold text-gold-light dark:text-white text-[0.55rem] tracking-widest uppercase px-2 py-0.5">
@@ -223,7 +223,7 @@ const ProductCard = ({ product, isFavorite, onToggleFavorite, onAddToCart, isSto
             : 'bg-dark dark:bg-gold text-white hover:bg-gold dark:hover:bg-white dark:hover:text-dark transition-all'
             }`}
         >
-          {product.stock === 0 ? 'Fin' : isStockReached ? 'Máximo en bolsa' : 'Añadir'}
+          {product.stock === 0 ? 'AGOTADO' : isStockReached ? 'Máximo en bolsa' : '+ Añadir'}
         </button>
       </div>
     </div>
