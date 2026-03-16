@@ -438,7 +438,15 @@ function StoreFront({
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const filteredProducts = products.filter(p => {
-    const matchesCategory = selectedCategory === 'All' || p.category.toLowerCase().includes(selectedCategory.toLowerCase());
+    let matchesCategory = false;
+    if (selectedCategory === 'All') {
+      matchesCategory = true;
+    } else if (selectedCategory === 'Available') {
+      matchesCategory = p.stock > 0;
+    } else {
+      matchesCategory = p.category.toLowerCase().includes(selectedCategory.toLowerCase());
+    }
+
     const matchesSearch = p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       p.category.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesFavorites = !showFavoritesOnly || favorites.includes(p.id);
@@ -493,6 +501,7 @@ function StoreFront({
                 onChange={(e) => setSelectedCategory(e.target.value)}
               >
                 <option value="All">Todas las Categorías</option>
+                <option value="Available">Solo Disponibles</option>
                 <option value="Dijes">Dijes</option>
                 <option value="Bracelets">Pulseras</option>
                 <option value="Collares">Collares</option>
