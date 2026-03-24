@@ -220,30 +220,30 @@ const NewArrivalsCarousel = () => {
             <div 
               key={`${product.id}-${index}`}
               onClick={() => navigate(`/producto/${product.id}`)}
-              className="flex-none w-[28%] sm:w-[22%] lg:w-[14%] xl:w-[12%] max-w-[170px] cursor-pointer mb-1 group/item"
+              className="flex-none w-[45%] sm:w-[35%] lg:w-[22%] xl:w-[20%] max-w-[280px] cursor-pointer mb-2 group/item"
             >
-              <div className="h-32 sm:h-40 overflow-hidden bg-gold-pale/30 dark:bg-slate-900/50 border border-gold/5 relative mb-2 transition-all duration-500 hover:border-gold/20">
+              <div className="aspect-square overflow-hidden bg-gold-pale/30 dark:bg-slate-900/50 border border-gold/5 relative mb-3 transition-all duration-500 hover:border-gold/20">
                 <img 
                   src={product.image} 
                   alt={product.name}
-                  className={`w-full h-full object-contain p-1.5 transition-all duration-1000 group-hover/item:scale-110 ${product.stock === 0 ? 'grayscale opacity-60' : ''}`}
+                  className={`w-full h-full object-cover transition-all duration-1000 group-hover/item:scale-110 ${product.stock === 0 ? 'grayscale opacity-60' : ''}`}
                 />
-                <div className="absolute top-1.5 left-1.5 flex flex-col gap-1">
+                <div className="absolute top-2 left-2 flex flex-col gap-1">
                    {product.stock === 0 ? (
-                     <span className="bg-red-500/80 text-white text-[0.4rem] font-bold px-1.5 py-0.5 tracking-[0.1em] uppercase backdrop-blur-sm">Agotado</span>
+                     <span className="bg-red-500/80 text-white text-[0.45rem] font-bold px-2 py-0.5 tracking-[0.1em] uppercase backdrop-blur-sm">Agotado</span>
                    ) : (
-                     <span className="bg-gold/80 text-white text-[0.4rem] font-bold px-1.5 py-0.5 tracking-[0.1em] uppercase backdrop-blur-sm">Nuevo</span>
+                     <span className="bg-gold/80 text-white text-[0.45rem] font-bold px-2 py-0.5 tracking-[0.1em] uppercase backdrop-blur-sm">Nuevo</span>
                    )}
                 </div>
               </div>
               <div className="px-0.5">
-                <h3 className="font-serif text-[0.68rem] text-dark dark:text-white mb-0.5 font-normal truncate uppercase tracking-widest">{product.name}</h3>
-                <div className="flex items-center justify-between mt-0.5">
-                  <span className="text-[0.65rem] font-medium text-gold/90">
+                <h3 className="font-serif text-[0.85rem] text-dark dark:text-white mb-1 font-normal truncate uppercase tracking-widest">{product.name}</h3>
+                <div className="flex items-center justify-between mt-1">
+                  <span className="text-[0.78rem] font-medium text-gold/90">
                     {new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP' }).format(product.price)}
                   </span>
-                  <button className="text-[0.5rem] tracking-[0.15em] uppercase text-mid/60 dark:text-slate-500 border-b border-transparent hover:border-gold hover:text-gold transition-all">
-                    Ver
+                  <button className="text-[0.6rem] tracking-[0.15em] uppercase text-mid/70 dark:text-slate-500 border-b border-transparent hover:border-gold hover:text-gold transition-all py-0.5">
+                    Ver detalle
                   </button>
                 </div>
               </div>
