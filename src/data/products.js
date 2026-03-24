@@ -365,4 +365,93 @@ export const products = [
         stock: 1,
         description: "Dije exclusivo de plata 925 con diseño inspirado en la naturaleza. Una pieza con alma propia que cuenta una historia. Ideal para armar una pulsera personalizada que refleje tu esencia. y alérgenos.\n\nPrecauciones y cuidado:\n• Evita el contacto: No expongas la joya a perfumes, cremas, alcohol gel, cloro, detergentes u otros químicos.\n• Uso adecuado: No usar en ducha, piscina o mar (el cloro y la sal aceleran el desgaste).\n• Almacenamiento: Guardar en una bolsa o caja seca cuando no se use para evitar rayas y oxidación.\n• Limpieza: Limpiar con un paño suave para plata. No uses productos abrasivos.\n• Nota sobre la Plata 925: Puede oscurecerse con el tiempo por oxidación natural, pero se recupera fácilmente con una limpieza adecuada.\n• Manejo: Evita tirones o forzar el broche o cadena de seguridad.\n• Recomendación: No sobrecargar con demasiados dijes para mantener el ajuste y la forma original de la pieza."
     }
+,
+    {
+        id: 116,
+        name: "Dije Plateado D016",
+        category: "Dijes",
+        collection: "Colección Plata 925",
+        price: 7990,
+        image: "/products/dijes/D016_blanco.jpg",
+        tag: "Nuevo",
+        stock: 1,
+        description: "Exclusivo dije D016 en plata de ley 925. Un diseño sofisticado y moderno que captura la esencia de la elegancia artesanal.\n\nPrecauciones y cuidado:\n• Evita el contacto: No expongas la joya a perfumes, cremas, alcohol gel, cloro, detergentes u otros químicos.\n• Uso adecuado: No usar en ducha, piscina o mar (el cloro y la sal aceleran el desgaste).\n• Almacenamiento: Guardar en una bolsa o caja seca cuando no se use para evitar rayas y oxidación.\n• Limpieza: Limpiar con un paño suave para plata. No uses productos abrasivos.\n• Nota sobre la Plata 925: Puede oscurecerse con el tiempo por oxidación natural, pero se recupera fácilmente con una limpieza adecuada.\n• Manejo: Evita tirones o forzar el broche o cadena de seguridad.\n• Recomendación: No sobrecargar con demasiados dijes para mantener el ajuste y la forma original de la pieza."
+    },
+    {
+        id: 117,
+        name: "Dije Plateado D017",
+        category: "Dijes",
+        collection: "Colección Plata 925",
+        price: 7990,
+        image: "/products/dijes/D017_blanco.jpg",
+        tag: "Nuevo",
+        stock: 1,
+        description: "Refinado dije D017 de nuestra colección Plata 925. Destaca por su acabado impecable y su versatilidad para cualquier ocasión.\n\nPrecauciones y cuidado:\n• Evita el contacto: No expongas la joya a perfumes, cremas, alcohol gel, cloro, detergentes u otros químicos.\n• Uso adecuado: No usar en ducha, piscina o mar (el cloro y la sal aceleran el desgaste).\n• Almacenamiento: Guardar en una bolsa o caja seca cuando no se use para evitar rayas y oxidación.\n• Limpieza: Limpiar con un paño suave para plata. No uses productos abrasivos.\n• Nota sobre la Plata 925: Puede oscurecerse con el tiempo por oxidación natural, pero se recupera fácilmente con una limpieza adecuada.\n• Manejo: Evita tirones o forzar el broche o cadena de seguridad.\n• Recomendación: No sobrecargar con demasiados dijes para mantener el ajuste y la forma original de la pieza."
+    },
+    {
+        id: 118,
+        name: "Dije Plateado D018",
+        category: "Dijes",
+        collection: "Colección Plata 925",
+        price: 7990,
+        image: "/products/dijes/D018_blanco.jpeg",
+        tag: "Nuevo",
+        stock: 1,
+        description: "Precioso dije artesanal D018 en plata 925. Una pieza única que añade un toque de distinción a tu colección personalizada.\n\nPrecauciones y cuidado:\n• Evita el contacto: No expongas la joya a perfumes, cremas, alcohol gel, cloro, detergentes u otros químicos.\n• Uso adecuado: No usar en ducha, piscina o mar (el cloro y la sal aceleran el desgaste).\n• Almacenamiento: Guardar en una bolsa o caja seca cuando no se use para evitar rayas y oxidación.\n• Limpieza: Limpiar con un paño suave para plata. No uses productos abrasivos.\n• Nota sobre la Plata 925: Puede oscurecerse con el tiempo por oxidación natural, pero se recupera fácilmente con una limpieza adecuada.\n• Manejo: Evita tirones o forzar el broche o cadena de seguridad.\n• Recomendación: No sobrecargar con demasiados dijes para mantener el ajuste y la forma original de la pieza."
+    },
+    {
+        id: 119,
+        name: "Dije Plateado D019",
+        category: "Dijes",
+        collection: "Colección Plata 925",
+        price: 7990,
+        image: "/products/dijes/D019_blanco.jpeg",
+        tag: "Nuevo",
+        stock: 1,
+        description: "Elegante dije D019 de diseño contemporáneo en plata de ley 925. Ideal para llevar solo o combinar en tu pulsera favorita.\n\nPrecauciones y cuidado:\n• Evita el contacto: No expongas la joya a perfumes, cremas, alcohol gel, cloro, detergentes u otros químicos.\n• Uso adecuado: No usar en ducha, piscina o mar (el cloro y la sal aceleran el desgaste).\n• Almacenamiento: Guardar en una bolsa o caja seca cuando no se use para evitar rayas y oxidación.\n• Limpieza: Limpiar con un paño suave para plata. No uses productos abrasivos.\n• Nota sobre la Plata 925: Puede oscurecerse con el tiempo por oxidación natural, pero se recupera fácilmente con una limpieza adecuada.\n• Manejo: Evita tirones o forzar el broche o cadena de seguridad.\n• Recomendación: No sobrecargar con demasiados dijes para mantener el ajuste y la forma original de la pieza."
+    },
+    {
+        id: 120,
+        name: "Dije Plateado D020",
+        category: "Dijes",
+        collection: "Colección Plata 925",
+        price: 7990,
+        image: "/products/dijes/D020_blanco.jpeg",
+        tag: "Nuevo",
+        stock: 1,
+        description: "Dije exclusivo D020 en plata 925 con terminaciones de alta joyería. Una joya diseñada para durar y brillar siempre.\n\nPrecauciones y cuidado:\n• Evita el contacto: No expongas la joya a perfumes, cremas, alcohol gel, cloro, detergentes u otros químicos.\n• Uso adecuado: No usar en ducha, piscina o mar (el cloro y la sal aceleran el desgaste).\n• Almacenamiento: Guardar en una bolsa o caja seca cuando no se use para evitar rayas y oxidación.\n• Limpieza: Limpiar con un paño suave para plata. No uses productos abrasivos.\n• Nota sobre la Plata 925: Puede oscurecerse con el tiempo por oxidación natural, pero se recupera fácilmente con una limpieza adecuada.\n• Manejo: Evita tirones o forzar el broche o cadena de seguridad.\n• Recomendación: No sobrecargar con demasiados dijes para mantener el ajuste y la forma original de la pieza."
+    },
+    {
+        id: 121,
+        name: "Dije Plateado D021",
+        category: "Dijes",
+        collection: "Colección Plata 925",
+        price: 7990,
+        image: "/products/dijes/D021_blanco.jpg",
+        tag: "Nuevo",
+        stock: 1,
+        description: "Delicado dije D021 en auténtica plata 925. Su forma única lo convierte en el protagonista de cualquier conjunto de joyas.\n\nPrecauciones y cuidado:\n• Evita el contacto: No expongas la joya a perfumes, cremas, alcohol gel, cloro, detergentes u otros químicos.\n• Uso adecuado: No usar en ducha, piscina o mar (el cloro y la sal aceleran el desgaste).\n• Almacenamiento: Guardar en una bolsa o caja seca cuando no se use para evitar rayas y oxidación.\n• Limpieza: Limpiar con un paño suave para plata. No uses productos abrasivos.\n• Nota sobre la Plata 925: Puede oscurecerse con el tiempo por oxidación natural, pero se recupera fácilmente con una limpieza adecuada.\n• Manejo: Evita tirones o forzar el broche o cadena de seguridad.\n• Recomendación: No sobrecargar con demasiados dijes para mantener el ajuste y la forma original de la pieza."
+    },
+    {
+        id: 122,
+        name: "Dije Plateado D022",
+        category: "Dijes",
+        collection: "Colección Plata 925",
+        price: 7990,
+        image: "/products/dijes/D022_blanco.jpg",
+        tag: "Nuevo",
+        stock: 1,
+        description: "Sofisticado dije D022 de nuestra línea Plata 925. Una pieza que fusiona tradición y modernidad en un diseño excepcional.\n\nPrecauciones y cuidado:\n• Evita el contacto: No expongas la joya a perfumes, cremas, alcohol gel, cloro, detergentes u otros químicos.\n• Uso adecuado: No usar en ducha, piscina o mar (el cloro y la sal aceleran el desgaste).\n• Almacenamiento: Guardar en una bolsa o caja seca cuando no se use para evitar rayas y oxidación.\n• Limpieza: Limpiar con un paño suave para plata. No uses productos abrasivos.\n• Nota sobre la Plata 925: Puede oscurecerse con el tiempo por oxidación natural, pero se recupera fácilmente con una limpieza adecuada.\n• Manejo: Evita tirones o forzar el broche o cadena de seguridad.\n• Recomendación: No sobrecargar con demasiados dijes para mantener el ajuste y la forma original de la pieza."
+    },
+    {
+        id: 123,
+        name: "Dije Plateado D023",
+        category: "Dijes",
+        collection: "Colección Plata 925",
+        price: 7990,
+        image: "/products/dijes/D023_blanco.jpeg",
+        tag: "Nuevo",
+        stock: 1,
+        description: "Completa tu estilo con el dije D023 en plata 925. Una pieza versátil y elegante que refleja tu personalidad única.\n\nPrecauciones y cuidado:\n• Evita el contacto: No expongas la joya a perfumes, cremas, alcohol gel, cloro, detergentes u otros químicos.\n• Uso adecuado: No usar en ducha, piscina o mar (el cloro y la sal aceleran el desgaste).\n• Almacenamiento: Guardar en una bolsa o caja seca cuando no se use para evitar rayas y oxidación.\n• Limpieza: Limpiar con un paño suave para plata. No uses productos abrasivos.\n• Nota sobre la Plata 925: Puede oscurecerse con el tiempo por oxidación natural, pero se recupera fácilmente con una limpieza adecuada.\n• Manejo: Evita tirones o forzar el broche o cadena de seguridad.\n• Recomendación: No sobrecargar con demasiados dijes para mantener el ajuste y la forma original de la pieza."
+    }
 ];
