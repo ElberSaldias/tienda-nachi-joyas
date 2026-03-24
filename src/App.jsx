@@ -4,6 +4,7 @@ import CartDrawer from './components/CartDrawer';
 import { BrowserRouter, Routes, Route, Link, useNavigate, useParams, useLocation } from 'react-router-dom';
 
 // ─── HEADER ──────────────────────────────────────────────────────────────────
+// ... (rest of imports/header if needed, wait, I only need to change line 1 and the carousel)
 const Header = ({
   favoritesCount, onCategorySelect, searchTerm, onSearchChange,
   onShowFavorites, showFavoritesOnly, cartCount, onShowCart, onMenuOpen,
@@ -217,8 +218,11 @@ const Hero = ({ onCategorySelect }) => (
 const NewArrivalsCarousel = () => {
   const scrollRef = useRef(null);
   const navigate = useNavigate();
-  // Incluimos pulseras 10-20 y dijes 116-123
-  const carouselProducts = products.filter(p => (p.id >= 10 && p.id <= 20) || (p.id >= 116 && p.id <= 123));
+  const [carouselProducts] = useState(() => {
+    return products
+      .filter(p => (p.id >= 10 && p.id <= 20) || (p.id >= 116 && p.id <= 123))
+      .sort(() => Math.random() - 0.5);
+  });
 
   useEffect(() => {
     const interval = setInterval(() => {
