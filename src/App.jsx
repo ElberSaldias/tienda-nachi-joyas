@@ -200,7 +200,7 @@ const NewArrivalsCarousel = () => {
   const navigate = useNavigate();
   const [carouselProducts] = useState(() => {
     return products
-      .filter(p => (p.id >= 10 && p.id <= 20) || (p.id >= 116 && p.id <= 123) || (p.id >= 201 && p.id <= 205))
+      .filter(p => (p.id >= 10 && p.id <= 20) || (p.id >= 116 && p.id <= 123) || (p.id >= 201 && p.id <= 205) || (p.id >= 301 && p.id <= 305))
       .sort(() => Math.random() - 0.5);
   });
 

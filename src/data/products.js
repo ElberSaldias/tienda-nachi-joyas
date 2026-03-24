@@ -449,7 +449,7 @@ export const products = [
         category: "Dijes",
         collection: "Colección Plata 925",
         price: 7990,
-        image: "/products/dijes/D023_blanco.jpg",
+        image: "/products/dijes/D023_blanco.jpeg",
         tag: "Nuevo",
         stock: 1,
         description: "Moderno dije D023 de nuestra Colección Plata 925. La pieza ideal para completar tu colección con un detalle de alta calidad.\n\nPrecauciones y cuidado:\n• Evita el contacto: No expongas la joya a perfumes, cremas, alcohol gel, cloro, detergentes u otros químicos.\n• Uso adecuado: No usar en ducha, piscina o mar (el cloro y la sal aceleran el desgaste).\n• Almacenamiento: Guardar en una bolsa o caja seca cuando no se use para evitar rayas y oxidación.\n• Limpieza: Limpiar con un paño suave para plata. No uses productos abrasivos.\n• Nota sobre la Plata 925: Puede oscurecerse con el tiempo por oxidación natural, pero se recupera fácilmente con una limpieza adecuada.\n• Manejo: Evita tirones o forzar el broche o cadena de seguridad.\n• Recomendación: No sobrecargar con demasiados dijes para mantener el ajuste y la forma original de la pieza."
@@ -486,5 +486,27 @@ export const products = [
         tag: "Nuevo",
         stock: 5,
         description: "Cadena de Seguridad CS003 fabricada en Plata 925. Combina funcionalidad y belleza, brindando seguridad extra con un diseño minimalista y moderno.\n\nPrecauciones y cuidado:\n• Evita el contacto: No expongas la joya a perfumes, cremas, alcohol gel, cloro, detergentes u otros químicos.\n• Uso adecuado: No usar en ducha, piscina o mar (el cloro y la sal aceleran el desgaste).\n• Almacenamiento: Guardar en una bolsa o caja seca cuando no se use para evitar rayas y oxidación.\n• Limpieza: Limpiar con un paño suave para plata. No uses productos abrasivos.\n• Nota sobre la Plata 925: Puede oscurecerse con el tiempo por oxidación natural, pero se recupera fácilmente con una limpieza adecuada.\n• Manejo: Evita tirones o forzar el broche o cadena de seguridad."
+    },
+    {
+        id: 301,
+        name: "Cadena A01",
+        category: "Collares",
+        collection: "Colección Plata 925",
+        price: 7990,
+        image: "/products/collares/A01.jpeg",
+        tag: "Nuevo",
+        stock: 5,
+        description: "Delicada Cadena A01 en auténtica Plata 925. Un clásico atemporal que eleva cualquier look con elegancia y sutileza.\n\nPrecauciones y cuidado:\n• Evita el contacto: No expongas la joya a perfumes, cremas, alcohol gel, cloro, detergentes u otros químicos.\n• Uso adecuado: No usar en ducha, piscina o mar (el cloro y la sal aceleran el desgaste).\n• Almacenamiento: Guardar en una bolsa o caja seca cuando no se use para evitar rayas y oxidación.\n• Limpieza: Limpiar con un paño suave para plata. No uses productos abrasivos.\n• Nota sobre la Plata 925: Puede oscurecerse con el tiempo por oxidación natural, pero se recupera fácilmente con una limpieza adecuada.\n• Manejo: Evita tirones o forzar el broche o la cadena."
+    },
+    {
+        id: 302,
+        name: "Cadena A02",
+        category: "Collares",
+        collection: "Colección Plata 925",
+        price: 9990,
+        image: "/products/collares/A02.jpeg",
+        tag: "Nuevo",
+        stock: 5,
+        description: "Sofisticada Cadena A02 en auténtica Plata 925. Un diseño premium que combina elegancia y durabilidad para acompañarte en cada momento especial.\n\nPrecauciones y cuidado:\n• Evita el contacto: No expongas la joya a perfumes, cremas, alcohol gel, cloro, detergentes u otros químicos.\n• Uso adecuado: No usar en ducha, piscina o mar (el cloro y la sal aceleran el desgaste).\n• Almacenamiento: Guardar en una bolsa o caja seca cuando no se use para evitar rayas y oxidación.\n• Limpieza: Limpiar con un paño suave para plata. No uses productos abrasivos.\n• Nota sobre la Plata 925: Puede oscurecerse con el tiempo por oxidación natural, pero se recupera fácilmente con una limpieza adecuada.\n• Manejo: Evita tirones o forzar el broche o la cadena."
     }
 ];
