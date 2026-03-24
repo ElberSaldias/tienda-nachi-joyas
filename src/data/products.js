@@ -174,7 +174,7 @@ export const products = [
         price: 14990,
         image: "/products/pulseras/P001_blanco.jpg",
         tag: "Nuevo",
-        stock: 0,
+        stock: 1,
         description: "Nueva pulsera de la Colección Esenciales. Diseñada para ser la base perfecta donde construir tu historia con dijes. Cierre ajustable para adaptarse a cualquier muñeca. Material de alta calidad, resistente al uso diario. Libre de níquel."
     },
     {
@@ -185,7 +185,7 @@ export const products = [
         price: 14990,
         image: "/products/pulseras/P002_blanco.jpg",
         tag: null,
-        stock: 0,
+        stock: 1,
         description: "Pulsera de la Colección Esenciales con diseño atemporal. Su versatilidad la hace perfecta para el uso diario o para una ocasión especial. Compatible con todos los dijes de nuestra colección. Hipoalergénica, libre de níquel."
     },
     {
@@ -251,7 +251,7 @@ export const products = [
         price: 14990,
         image: "/products/pulseras/P008_blanco.jpg",
         tag: null,
-        stock: 0,
+        stock: 1,
         description: "Refinada pulsera P008 de la Colección Esenciales. Material de primera calidad con un acabado que mantiene su brillo con el tiempo. Compatible con los dijes de nuestra colección Plata 925. Hipoalergénica, libre de níquel y cadmio."
     },
     {
@@ -264,5 +264,104 @@ export const products = [
         tag: null,
         stock: 1,
         description: "Pulsera P009, la más reciente incorporación a la Colección Esenciales. Diseño cuidado con atención al detalle para ofrecer una pieza de alta calidad. Cierre ajustable para todas las tallas. Hipoalergénica, libre de níquel."
+    },
+    {
+        id: 25,
+        name: "Pulsera Style P010",
+        category: "Bracelets",
+        collection: "Colección Esenciales",
+        price: 14990,
+        image: "/products/pulseras/P010_blanco.jpg",
+        tag: "Nuevo",
+        stock: 1,
+        description: "Elegante pulsera P010 de la Colección Esenciales. Su diseño minimalista y versátil la hace perfecta para complementar cualquier estilo. Material de alta calidad, resistente e hipoalergénico. Libre de níquel."
+    },
+    {
+        id: 26,
+        name: "Pulsera Style P011",
+        category: "Bracelets",
+        collection: "Colección Esenciales",
+        price: 14990,
+        image: "/products/pulseras/P011_blanco.png",
+        tag: "Nuevo",
+        stock: 1,
+        description: "Pulsera P011 de diseño moderno y sofisticado. Una pieza esencial para tu colección que destaca por su acabado impecable. Ideal para usar sola o con tus dijes favoritos. Hipoalergénica y libre de níquel."
+    },
+    {
+        id: 27,
+        name: "Pulsera Style P012",
+        category: "Bracelets",
+        collection: "Colección Esenciales",
+        price: 14990,
+        image: "/products/pulseras/P012_blanco.png",
+        tag: "Nuevo",
+        stock: 1,
+        description: "Descubre la Pulsera P012, una joya de nuestra Colección Esenciales. Confeccionada con materiales de primera calidad, esta pulsera ofrece durabilidad y un brillo excepcional. Perfecta para realzar tu muñeca en cualquier ocasión."
+    },
+    {
+        id: 28,
+        name: "Pulsera Style P013",
+        category: "Bracelets",
+        collection: "Colección Esenciales",
+        price: 14990,
+        image: "/products/pulseras/P013_blanco.png",
+        tag: "Nuevo",
+        stock: 1,
+        description: "Pulsera P013 de estilo refinado. Una pieza que combina la elegancia clásica con un toque contemporáneo. Ideal para personalizar y llevar tus momentos especiales siempre contigo. Hipoalergénica."
+    },
+    {
+        id: 29,
+        name: "Pulsera Style P014",
+        category: "Bracelets",
+        collection: "Colección Esenciales",
+        price: 14990,
+        image: "/products/pulseras/P014_blanco.png",
+        tag: "Nuevo",
+        stock: 1,
+        description: "La Pulsera P014 es el complemento ideal para quienes buscan sutileza y elegancia. Su diseño atemporal asegura que sea una pieza clave en tu joyero por años. Fabricada sin níquel, cuidando tu piel."
+    },
+    {
+        id: 30,
+        name: "Pulsera Style P015",
+        category: "Bracelets",
+        collection: "Colección Esenciales",
+        price: 14990,
+        image: "/products/pulseras/P015_blanco.png",
+        tag: "Nuevo",
+        stock: 1,
+        description: "Elegancia pura en la Pulsera P015. Esta pieza de la Colección Esenciales destaca por su versatilidad y belleza. Un regalo perfecto para alguien especial o para darte un gusto con una joya de calidad superior."
+    },
+    {
+        id: 31,
+        name: "Pulsera Style P016",
+        category: "Bracelets",
+        collection: "Colección Esenciales",
+        price: 14990,
+        image: "/products/pulseras/P016_blanco.png",
+        tag: "Nuevo",
+        stock: 1,
+        description: "Añade un toque de distinción a tu look con la Pulsera P016. Diseñada para ser duradera y mantener su esplendor con el paso del tiempo. Compatible con todos nuestros dijes de plata 925. Hipoalergénica."
+    },
+    {
+        id: 32,
+        name: "Pulsera Style P017",
+        category: "Bracelets",
+        collection: "Colección Esenciales",
+        price: 14990,
+        image: "/products/pulseras/P017_blanco.png",
+        tag: "Nuevo",
+        stock: 1,
+        description: "Pulsera P017 de diseño único y atractivo. Una joya que captura la esencia de la elegancia moderna. Su acabado brillante refleja la calidad de los materiales utilizados. Libre de níquel y cadmio."
+    },
+    {
+        id: 33,
+        name: "Pulsera Style P020",
+        category: "Bracelets",
+        collection: "Colección Esenciales",
+        price: 14990,
+        image: "/products/pulseras/P020_blanco.jpg",
+        tag: "Nuevo",
+        stock: 1,
+        description: "Completa tu colección con la Pulsera P020. Una pieza versátil y sofisticada que se adapta a cualquier ocasión. Diseñada pensando en la comodidad y el estilo duradero. Material hipoalergénico certificado."
     }
 ];
