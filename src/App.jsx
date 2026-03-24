@@ -15,14 +15,9 @@ const Header = ({
     { name: 'Dijes', id: 'Dijes' },
     { name: 'Pulseras', id: 'Bracelets' },
     { name: 'Collares', id: 'Collares' },
-    { name: 'Sobre Nosotras', id: 'sobre' },
   ];
 
   const handleNavClick = (item) => {
-    if (item.id === 'sobre') {
-      document.getElementById('sobre-nosotras')?.scrollIntoView({ behavior: 'smooth' });
-      return;
-    }
     onCategorySelect(item.id);
     onShowFavorites(false);
     setTimeout(() => {
@@ -111,13 +106,6 @@ const MobileMenu = ({ isOpen, onClose, onCategorySelect }) => {
   ];
 
   const handleClick = (item) => {
-    if (item.id === 'sobre') {
-      onClose();
-      setTimeout(() => {
-        document.getElementById('sobre-nosotras')?.scrollIntoView({ behavior: 'smooth' });
-      }, 300);
-      return;
-    }
     onCategorySelect(item.id);
     onClose();
     setTimeout(() => {
@@ -202,14 +190,6 @@ const Hero = ({ onCategorySelect }) => (
         >
           Ver Colección
         </a>
-        <button
-          onClick={() => {
-            document.getElementById('sobre-nosotras')?.scrollIntoView({ behavior: 'smooth' });
-          }}
-          className="bg-transparent text-white border border-white/50 hover:border-gold hover:bg-gold/10 px-9 py-4 font-sans text-[0.75rem] tracking-wider uppercase transition-all cursor-pointer"
-        >
-          Saber Más
-        </button>
       </div>
     </div>
   </section>
@@ -428,7 +408,7 @@ const Footer = ({ onCategorySelect }) => {
   ];
 
   return (
-    <footer id="sobre-nosotras" className="bg-[#0F0D0B] pt-20 pb-10 px-6 md:px-16 text-white/50">
+    <footer>
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-14 mb-14 pb-14 border-b border-white/10">
         <div className="space-y-6">
           <Link to="/" className="flex flex-col items-start no-underline leading-none">
@@ -461,12 +441,9 @@ const Footer = ({ onCategorySelect }) => {
           <h5 className="text-[0.65rem] tracking-widest uppercase text-gold-light font-normal mb-6">Información</h5>
           <ul className="space-y-3 text-[0.82rem]">
             <li>
-              <button
-                onClick={() => document.getElementById('sobre-nosotras')?.scrollIntoView({ behavior: 'smooth' })}
-                className="hover:text-gold-light transition-colors bg-transparent border-none cursor-pointer text-inherit text-[0.82rem]"
-              >
-                Sobre Nosotras
-              </button>
+              <a href="https://wa.me/56966791895" target="_blank" rel="noopener noreferrer" className="hover:text-gold-light transition-colors">
+                Contacto WhatsApp
+              </a>
             </li>
             <li>
               <a href="https://wa.me/56966791895" target="_blank" rel="noopener noreferrer" className="hover:text-gold-light transition-colors">
