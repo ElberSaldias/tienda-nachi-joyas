@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { products } from './data/products';
 import CartDrawer from './components/CartDrawer';
 import { BrowserRouter, Routes, Route, Link, useNavigate, useParams, useLocation } from 'react-router-dom';
@@ -213,6 +213,93 @@ const Hero = ({ onCategorySelect }) => (
     </div>
   </section>
 );
+// ─── NEW ARRIVALS CAROUSEL ──────────────────────────────────────────────────
+const NewArrivalsCarousel = () => {
+  const scrollRef = useRef(null);
+  const navigate = useNavigate();
+  const carouselProducts = products.filter(p => p.id >= 10 && p.id <= 20);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (scrollRef.current) {
+        const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+        const maxScroll = scrollWidth - clientWidth;
+        
+        if (scrollLeft >= maxScroll - 10) {
+          scrollRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          // Desplazamiento de una o varias tarjetas según el ancho
+          const scrollAmount = clientWidth > 768 ? clientWidth / 3 : clientWidth;
+          scrollRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
+      }
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  if (carouselProducts.length === 0) return null;
+
+  return (
+    <section className="py-20 bg-gold-pale/30 dark:bg-slate-900/40 border-t border-gold/15 transition-colors">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-16">
+        <div className="flex items-center justify-between mb-12">
+          <div>
+            <h2 className="font-serif text-3xl md:text-4xl text-dark dark:text-white font-light tracking-wide mb-2 italic">Nuevas Joyas</h2>
+            <div className="w-12 h-[2px] bg-gold"></div>
+          </div>
+          <div className="flex gap-3">
+             <button 
+               onClick={(e) => { e.stopPropagation(); scrollRef.current.scrollBy({left: -320, behavior: 'smooth'}); }}
+               className="w-11 h-11 rounded-full border border-gold/20 flex items-center justify-center text-gold hover:bg-gold hover:text-white transition-all shadow-sm bg-white dark:bg-dark"
+             >
+               <span className="material-symbols-outlined !text-xl">arrow_back</span>
+             </button>
+             <button 
+               onClick={(e) => { e.stopPropagation(); scrollRef.current.scrollBy({left: 320, behavior: 'smooth'}); }}
+               className="w-11 h-11 rounded-full border border-gold/20 flex items-center justify-center text-gold hover:bg-gold hover:text-white transition-all shadow-sm bg-white dark:bg-dark"
+             >
+               <span className="material-symbols-outlined !text-xl">arrow_forward</span>
+             </button>
+          </div>
+        </div>
+
+        <div 
+          ref={scrollRef}
+          className="flex gap-6 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-10"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        >
+          {carouselProducts.map((product) => (
+            <div 
+              key={product.id}
+              onClick={() => navigate(`/producto/${product.id}`)}
+              className="min-w-[85%] sm:min-w-[45%] lg:min-w-[30%] xl:min-w-[23%] snap-start group cursor-pointer"
+            >
+              <div className="aspect-[4/5] overflow-hidden bg-white dark:bg-slate-800 mb-5 relative shadow-sm transition-all duration-700 group-hover:shadow-2xl group-hover:-translate-y-2">
+                <img 
+                  src={product.image} 
+                  alt={product.name}
+                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                />
+                <div className="absolute top-5 left-5">
+                   <span className="bg-[#D4AF37] text-white text-[0.6rem] font-bold px-4 py-1.5 tracking-[0.2em] uppercase shadow-lg border border-white/20">NUEVO</span>
+                </div>
+                <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 z-20">
+                   <span className="bg-white text-dark text-[0.65rem] font-bold px-6 py-2 tracking-widest uppercase shadow-xl whitespace-nowrap">Ver Detalle</span>
+                </div>
+              </div>
+              <p className="text-[0.6rem] tracking-[0.2em] uppercase text-gold mb-1.5">{product.category === 'Bracelets' ? 'Pulseras' : product.category}</p>
+              <h3 className="font-serif text-xl text-dark dark:text-white mb-2 font-normal leading-tight group-hover:text-gold transition-colors">{product.name}</h3>
+              <p className="text-dark dark:text-gold-light font-medium tracking-wide">
+                {new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP' }).format(product.price)}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
 
 // ─── PRODUCT CARD ─────────────────────────────────────────────────────────────
 const ProductCard = ({ product, isFavorite, onToggleFavorite, onAddToCart, isStockReached }) => {
@@ -831,6 +918,7 @@ function StoreFront({
       />
 
       <Hero onCategorySelect={setSelectedCategory} />
+      <NewArrivalsCarousel />
 
       {/* COLLECTION SECTION */}
       <section id="coleccion" className="bg-white dark:bg-[#1a1714] py-24 px-6 md:px-16 border-t border-gold/25 transition-colors">
