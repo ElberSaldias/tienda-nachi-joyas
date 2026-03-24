@@ -449,9 +449,42 @@ export const products = [
         category: "Dijes",
         collection: "Colección Plata 925",
         price: 7990,
-        image: "/products/dijes/D023_blanco.jpeg",
+        image: "/products/dijes/D023_blanco.jpg",
         tag: "Nuevo",
         stock: 1,
-        description: "Completa tu estilo con el dije D023 en plata 925. Una pieza versátil y elegante que refleja tu personalidad única.\n\nPrecauciones y cuidado:\n• Evita el contacto: No expongas la joya a perfumes, cremas, alcohol gel, cloro, detergentes u otros químicos.\n• Uso adecuado: No usar en ducha, piscina o mar (el cloro y la sal aceleran el desgaste).\n• Almacenamiento: Guardar en una bolsa o caja seca cuando no se use para evitar rayas y oxidación.\n• Limpieza: Limpiar con un paño suave para plata. No uses productos abrasivos.\n• Nota sobre la Plata 925: Puede oscurecerse con el tiempo por oxidación natural, pero se recupera fácilmente con una limpieza adecuada.\n• Manejo: Evita tirones o forzar el broche o cadena de seguridad.\n• Recomendación: No sobrecargar con demasiados dijes para mantener el ajuste y la forma original de la pieza."
+        description: "Moderno dije D023 de nuestra Colección Plata 925. La pieza ideal para completar tu colección con un detalle de alta calidad.\n\nPrecauciones y cuidado:\n• Evita el contacto: No expongas la joya a perfumes, cremas, alcohol gel, cloro, detergentes u otros químicos.\n• Uso adecuado: No usar en ducha, piscina o mar (el cloro y la sal aceleran el desgaste).\n• Almacenamiento: Guardar en una bolsa o caja seca cuando no se use para evitar rayas y oxidación.\n• Limpieza: Limpiar con un paño suave para plata. No uses productos abrasivos.\n• Nota sobre la Plata 925: Puede oscurecerse con el tiempo por oxidación natural, pero se recupera fácilmente con una limpieza adecuada.\n• Manejo: Evita tirones o forzar el broche o cadena de seguridad.\n• Recomendación: No sobrecargar con demasiados dijes para mantener el ajuste y la forma original de la pieza."
+    },
+    {
+        id: 201,
+        name: "Cadena de Seguridad CS001",
+        category: "CADENAS DE SEGURIDAD",
+        collection: "Colección Plata 925",
+        price: 7990,
+        image: "/products/cadenas/CS001.jpg",
+        tag: "Nuevo",
+        stock: 5,
+        description: "Elegante Cadena de Seguridad CS001 en Plata 925. Diseñada para proteger tus dijes y darle un toque extra de sofisticación a tu pulsera.\n\nPrecauciones y cuidado:\n• Evita el contacto: No expongas la joya a perfumes, cremas, alcohol gel, cloro, detergentes u otros químicos.\n• Uso adecuado: No usar en ducha, piscina o mar (el cloro y la sal aceleran el desgaste).\n• Almacenamiento: Guardar en una bolsa o caja seca cuando no se use para evitar rayas y oxidación.\n• Limpieza: Limpiar con un paño suave para plata. No uses productos abrasivos.\n• Nota sobre la Plata 925: Puede oscurecerse con el tiempo por oxidación natural, pero se recupera fácilmente con una limpieza adecuada.\n• Manejo: Evita tirones o forzar el broche o cadena de seguridad."
+    },
+    {
+        id: 202,
+        name: "Cadena de Seguridad CS002",
+        category: "CADENAS DE SEGURIDAD",
+        collection: "Colección Plata 925",
+        price: 7990,
+        image: "/products/cadenas/CS002.jpeg",
+        tag: "Nuevo",
+        stock: 5,
+        description: "Cadena de Seguridad CS002 de alta calidad en auténtica Plata 925. El complemento esencial para asegurar que tu historia se mantenga siempre contigo.\n\nPrecauciones y cuidado:\n• Evita el contacto: No expongas la joya a perfumes, cremas, alcohol gel, cloro, detergentes u otros químicos.\n• Uso adecuado: No usar en ducha, piscina o mar (el cloro y la sal aceleran el desgaste).\n• Almacenamiento: Guardar en una bolsa o caja seca cuando no se use para evitar rayas y oxidación.\n• Limpieza: Limpiar con un paño suave para plata. No uses productos abrasivos.\n• Nota sobre la Plata 925: Puede oscurecerse con el tiempo por oxidación natural, pero se recupera fácilmente con una limpieza adecuada.\n• Manejo: Evita tirones o forzar el broche o cadena de seguridad."
+    },
+    {
+        id: 203,
+        name: "Cadena de Seguridad CS003",
+        category: "CADENAS DE SEGURIDAD",
+        collection: "Colección Plata 925",
+        price: 7990,
+        image: "/products/cadenas/CS003.jpeg",
+        tag: "Nuevo",
+        stock: 5,
+        description: "Cadena de Seguridad CS003 fabricada en Plata 925. Combina funcionalidad y belleza, brindando seguridad extra con un diseño minimalista y moderno.\n\nPrecauciones y cuidado:\n• Evita el contacto: No expongas la joya a perfumes, cremas, alcohol gel, cloro, detergentes u otros químicos.\n• Uso adecuado: No usar en ducha, piscina o mar (el cloro y la sal aceleran el desgaste).\n• Almacenamiento: Guardar en una bolsa o caja seca cuando no se use para evitar rayas y oxidación.\n• Limpieza: Limpiar con un paño suave para plata. No uses productos abrasivos.\n• Nota sobre la Plata 925: Puede oscurecerse con el tiempo por oxidación natural, pero se recupera fácilmente con una limpieza adecuada.\n• Manejo: Evita tirones o forzar el broche o cadena de seguridad."
     }
 ];

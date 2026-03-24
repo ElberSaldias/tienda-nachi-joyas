@@ -15,6 +15,7 @@ const Header = ({
     { name: 'Dijes', id: 'Dijes' },
     { name: 'Pulseras', id: 'Bracelets' },
     { name: 'Collares', id: 'Collares' },
+    { name: 'Cadenas de Seguridad', id: 'CADENAS DE SEGURIDAD' },
   ];
 
   const handleNavClick = (item) => {
@@ -102,7 +103,7 @@ const MobileMenu = ({ isOpen, onClose, onCategorySelect }) => {
     { name: 'Dijes', id: 'Dijes' },
     { name: 'Pulseras', id: 'Bracelets' },
     { name: 'Collares', id: 'Collares' },
-    { name: 'Sobre Nosotras', id: 'sobre' },
+    { name: 'Cadenas de Seguridad', id: 'CADENAS DE SEGURIDAD' },
   ];
 
   const handleClick = (item) => {
@@ -199,7 +200,7 @@ const NewArrivalsCarousel = () => {
   const navigate = useNavigate();
   const [carouselProducts] = useState(() => {
     return products
-      .filter(p => (p.id >= 10 && p.id <= 20) || (p.id >= 116 && p.id <= 123))
+      .filter(p => (p.id >= 10 && p.id <= 20) || (p.id >= 116 && p.id <= 123) || (p.id >= 201 && p.id <= 205))
       .sort(() => Math.random() - 0.5);
   });
 
