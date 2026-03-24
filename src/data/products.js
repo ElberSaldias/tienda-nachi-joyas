@@ -429,7 +429,7 @@ export const products = [
         price: 7990,
         image: "/products/dijes/D021_blanco.jpg",
         tag: "Nuevo",
-        stock: 1,
+        stock: 0,
         description: "Delicado dije D021 en auténtica plata 925. Su forma única lo convierte en el protagonista de cualquier conjunto de joyas.\n\nPrecauciones y cuidado:\n• Evita el contacto: No expongas la joya a perfumes, cremas, alcohol gel, cloro, detergentes u otros químicos.\n• Uso adecuado: No usar en ducha, piscina o mar (el cloro y la sal aceleran el desgaste).\n• Almacenamiento: Guardar en una bolsa o caja seca cuando no se use para evitar rayas y oxidación.\n• Limpieza: Limpiar con un paño suave para plata. No uses productos abrasivos.\n• Nota sobre la Plata 925: Puede oscurecerse con el tiempo por oxidación natural, pero se recupera fácilmente con una limpieza adecuada.\n• Manejo: Evita tirones o forzar el broche o cadena de seguridad.\n• Recomendación: No sobrecargar con demasiados dijes para mantener el ajuste y la forma original de la pieza."
     },
     {

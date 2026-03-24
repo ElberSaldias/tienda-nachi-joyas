@@ -228,73 +228,73 @@ const NewArrivalsCarousel = () => {
         if (scrollLeft >= maxScroll - 10) {
           scrollRef.current.scrollTo({ left: 0, behavior: 'smooth' });
         } else {
-          // Desplazamiento de una o varias tarjetas según el ancho
-          const scrollAmount = clientWidth > 768 ? clientWidth / 3 : clientWidth;
-          scrollRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+          // Desplazamiento aproximado de una tarjeta
+          const cardWidth = clientWidth > 1024 ? clientWidth / 4.5 : clientWidth / 1.5;
+          scrollRef.current.scrollBy({ left: cardWidth, behavior: 'smooth' });
         }
       }
     }, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [carouselProducts.length]);
 
   if (carouselProducts.length === 0) return null;
 
   return (
-    <section className="py-20 bg-gold-pale/30 dark:bg-slate-900/40 border-t border-gold/15 transition-colors">
+    <section className="py-12 bg-white dark:bg-[#1a1714] border-t border-gold/10 relative group z-10">
       <div className="max-w-[1400px] mx-auto px-6 md:px-16">
-        <div className="flex items-center justify-between mb-12">
-          <div>
-            <h2 className="font-serif text-3xl md:text-4xl text-dark dark:text-white font-light tracking-wide mb-2 italic">Nuevas Joyas</h2>
-            <div className="w-12 h-[2px] bg-gold"></div>
-          </div>
-          <div className="flex gap-3">
-             <button 
-               onClick={(e) => { e.stopPropagation(); scrollRef.current.scrollBy({left: -320, behavior: 'smooth'}); }}
-               className="w-11 h-11 rounded-full border border-gold/20 flex items-center justify-center text-gold hover:bg-gold hover:text-white transition-all shadow-sm bg-white dark:bg-dark"
-             >
-               <span className="material-symbols-outlined !text-xl">arrow_back</span>
-             </button>
-             <button 
-               onClick={(e) => { e.stopPropagation(); scrollRef.current.scrollBy({left: 320, behavior: 'smooth'}); }}
-               className="w-11 h-11 rounded-full border border-gold/20 flex items-center justify-center text-gold hover:bg-gold hover:text-white transition-all shadow-sm bg-white dark:bg-dark"
-             >
-               <span className="material-symbols-outlined !text-xl">arrow_forward</span>
-             </button>
-          </div>
-        </div>
+        <h2 className="font-serif italic text-2xl md:text-2xl text-dark dark:text-white font-light tracking-wide mb-8 text-left">Nuevas Joyas</h2>
+        
+        <div className="relative">
+          {/* Flechas discretas (visibles solo en hover del grupo) */}
+          <button 
+            onClick={(e) => { e.stopPropagation(); scrollRef.current.scrollBy({left: -300, behavior: 'smooth'}); }}
+            className="absolute -left-2 md:-left-4 top-[40%] -translate-y-1/2 z-20 w-8 h-8 flex items-center justify-center text-gold opacity-0 group-hover:opacity-100 transition-opacity bg-white/90 dark:bg-dark/90 rounded-full shadow-sm border border-gold/10"
+          >
+            <span className="material-symbols-outlined !text-xl">chevron_left</span>
+          </button>
+          
+          <button 
+            onClick={(e) => { e.stopPropagation(); scrollRef.current.scrollBy({left: 300, behavior: 'smooth'}); }}
+            className="absolute -right-2 md:-right-4 top-[40%] -translate-y-1/2 z-20 w-8 h-8 flex items-center justify-center text-gold opacity-0 group-hover:opacity-100 transition-opacity bg-white/90 dark:bg-dark/90 rounded-full shadow-sm border border-gold/10"
+          >
+            <span className="material-symbols-outlined !text-xl">chevron_right</span>
+          </button>
 
-        <div 
-          ref={scrollRef}
-          className="flex gap-6 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-10"
-          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-        >
-          {carouselProducts.map((product) => (
-            <div 
-              key={product.id}
-              onClick={() => navigate(`/producto/${product.id}`)}
-              className="min-w-[85%] sm:min-w-[45%] lg:min-w-[30%] xl:min-w-[23%] snap-start group cursor-pointer"
-            >
-              <div className="aspect-[4/5] overflow-hidden bg-white dark:bg-slate-800 mb-5 relative shadow-sm transition-all duration-700 group-hover:shadow-2xl group-hover:-translate-y-2">
-                <img 
-                  src={product.image} 
-                  alt={product.name}
-                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-                />
-                <div className="absolute top-5 left-5">
-                   <span className="bg-[#D4AF37] text-white text-[0.6rem] font-bold px-4 py-1.5 tracking-[0.2em] uppercase shadow-lg border border-white/20">NUEVO</span>
+          <div 
+            ref={scrollRef}
+            className="flex gap-4 md:gap-5 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-6"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {carouselProducts.map((product) => (
+              <div 
+                key={product.id}
+                onClick={() => navigate(`/producto/${product.id}`)}
+                className="flex-none w-[65%] sm:w-[40%] lg:w-[22%] snap-start cursor-pointer"
+              >
+                <div className="aspect-square overflow-hidden bg-gold-pale dark:bg-slate-900 border border-gold/5 relative mb-3 transition-all duration-500 hover:border-gold/20">
+                  <img 
+                    src={product.image} 
+                    alt={product.name}
+                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                  />
+                  <div className="absolute top-2 left-2">
+                     <span className="bg-gold/80 text-white text-[0.45rem] font-bold px-2 py-0.5 tracking-[0.15em] uppercase shadow-sm backdrop-blur-sm">Nuevo</span>
+                  </div>
                 </div>
-                <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 z-20">
-                   <span className="bg-white text-dark text-[0.65rem] font-bold px-6 py-2 tracking-widest uppercase shadow-xl whitespace-nowrap">Ver Detalle</span>
+                <div className="px-0.5">
+                  <h3 className="font-serif text-[0.8rem] text-dark dark:text-white mb-1 font-normal truncate uppercase tracking-wider">{product.name}</h3>
+                  <div className="flex items-center justify-between mt-1">
+                    <span className="text-[0.75rem] font-medium text-gold/90">
+                      {new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP' }).format(product.price)}
+                    </span>
+                    <button className="text-[0.6rem] tracking-[0.2em] uppercase text-mid/70 dark:text-slate-500 border-b border-transparent hover:border-gold hover:text-gold transition-all py-0.5">
+                      Detalles
+                    </button>
+                  </div>
                 </div>
               </div>
-              <p className="text-[0.6rem] tracking-[0.2em] uppercase text-gold mb-1.5">{product.category === 'Bracelets' ? 'Pulseras' : product.category}</p>
-              <h3 className="font-serif text-xl text-dark dark:text-white mb-2 font-normal leading-tight group-hover:text-gold transition-colors">{product.name}</h3>
-              <p className="text-dark dark:text-gold-light font-medium tracking-wide">
-                {new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP' }).format(product.price)}
-              </p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>
