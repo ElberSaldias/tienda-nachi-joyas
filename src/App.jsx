@@ -661,7 +661,7 @@ const ProductDetailPage = ({
             {/* Material badge */}
             <div className="flex items-center gap-3 mb-8 pb-8 border-b border-gold/10">
               <span className="material-symbols-outlined notranslate text-gold !text-base">verified</span>
-              <span className="text-[0.75rem] tracking-wider text-mid dark:text-slate-400">Plata 925 · Hipoalergénica · Libre de níquel</span>
+              <span className="text-[0.75rem] tracking-wider text-mid dark:text-slate-400">Plata 925</span>
             </div>
 
             {/* Stock + Add to cart */}
