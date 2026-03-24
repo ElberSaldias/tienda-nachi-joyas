@@ -653,8 +653,8 @@ const ProductDetailPage = ({
 
             {/* Divider + Description */}
             <div className="border-t border-gold/15 pt-8 mb-8">
-              <p className="text-mid dark:text-slate-400 text-[0.9rem] font-light leading-loose">
-                {product.description || 'Pieza artesanal de alta calidad en plata 925. Hipoalergénica, libre de níquel.'}
+              <p className="text-mid dark:text-slate-400 text-[0.9rem] font-light leading-loose whitespace-pre-line">
+                {product.description || 'Pieza artesanal de alta calidad en plata 925.'}
               </p>
             </div>
 
