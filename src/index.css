@@ -161,3 +161,23 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-content {
+  display: flex;
+  animation: marquee 45s linear infinite;
+  width: max-content;
+}
+
+.marquee-content:hover {
+  animation-play-state: paused;
+}

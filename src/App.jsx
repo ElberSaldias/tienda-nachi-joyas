@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { products } from './data/products';
 import CartDrawer from './components/CartDrawer';
 import { BrowserRouter, Routes, Route, Link, useNavigate, useParams, useLocation } from 'react-router-dom';
@@ -196,7 +196,6 @@ const Hero = ({ onCategorySelect }) => (
 );
 // ─── NEW ARRIVALS CAROUSEL ──────────────────────────────────────────────────
 const NewArrivalsCarousel = () => {
-  const scrollRef = useRef(null);
   const navigate = useNavigate();
   const [carouselProducts] = useState(() => {
     return products
@@ -204,84 +203,52 @@ const NewArrivalsCarousel = () => {
       .sort(() => Math.random() - 0.5);
   });
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (scrollRef.current) {
-        const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-        const maxScroll = scrollWidth - clientWidth;
-        
-        if (scrollLeft >= maxScroll - 10) {
-          scrollRef.current.scrollTo({ left: 0, behavior: 'smooth' });
-        } else {
-          const cardWidth = clientWidth > 1024 ? clientWidth / 4.5 : clientWidth / 1.5;
-          scrollRef.current.scrollBy({ left: cardWidth, behavior: 'smooth' });
-        }
-      }
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [carouselProducts.length]);
-
   if (carouselProducts.length === 0) return null;
 
-  return (
-    <section className="py-12 bg-white dark:bg-[#1a1714] border-t border-gold/10 relative group z-10">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-16">
-        <h2 className="font-serif italic text-2xl md:text-2xl text-dark dark:text-white font-light tracking-wide mb-8 text-left">Nuevas Joyas</h2>
-        
-        <div className="relative">
-          <button 
-            onClick={(e) => { e.stopPropagation(); scrollRef.current.scrollBy({left: -300, behavior: 'smooth'}); }}
-            className="absolute -left-2 md:-left-4 top-[40%] -translate-y-1/2 z-20 w-8 h-8 flex items-center justify-center text-gold opacity-0 group-hover:opacity-100 transition-opacity bg-white/90 dark:bg-dark/90 rounded-full shadow-sm border border-gold/10"
-          >
-            <span className="material-symbols-outlined !text-xl">chevron_left</span>
-          </button>
-          
-          <button 
-            onClick={(e) => { e.stopPropagation(); scrollRef.current.scrollBy({left: 300, behavior: 'smooth'}); }}
-            className="absolute -right-2 md:-right-4 top-[40%] -translate-y-1/2 z-20 w-8 h-8 flex items-center justify-center text-gold opacity-0 group-hover:opacity-100 transition-opacity bg-white/90 dark:bg-dark/90 rounded-full shadow-sm border border-gold/10"
-          >
-            <span className="material-symbols-outlined !text-xl">chevron_right</span>
-          </button>
+  // Los duplicamos para el efecto de loop infinito sin cortes
+  const marqueeItems = [...carouselProducts, ...carouselProducts];
 
-          <div 
-            ref={scrollRef}
-            className="flex gap-4 md:gap-5 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-6"
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-          >
-            {carouselProducts.map((product) => (
-              <div 
-                key={product.id}
-                onClick={() => navigate(`/producto/${product.id}`)}
-                className="flex-none w-[65%] sm:w-[40%] lg:w-[22%] snap-start cursor-pointer"
-              >
-                <div className="aspect-square overflow-hidden bg-gold-pale dark:bg-slate-900 border border-gold/5 relative mb-3 transition-all duration-500 hover:border-gold/20">
-                  <img 
-                    src={product.image} 
-                    alt={product.name}
-                    className={`w-full h-full object-cover transition-all duration-1000 ${product.stock === 0 ? 'grayscale opacity-60' : ''}`}
-                  />
-                  <div className="absolute top-2 left-2 flex flex-col gap-1">
-                     {product.stock === 0 ? (
-                       <span className="bg-red-500/80 text-white text-[0.45rem] font-bold px-2 py-0.5 tracking-[0.15em] uppercase shadow-sm backdrop-blur-sm">Agotado</span>
-                     ) : (
-                       <span className="bg-gold/80 text-white text-[0.45rem] font-bold px-2 py-0.5 tracking-[0.15em] uppercase shadow-sm backdrop-blur-sm">Nuevo</span>
-                     )}
-                  </div>
-                </div>
-                <div className="px-0.5">
-                  <h3 className="font-serif text-[0.8rem] text-dark dark:text-white mb-1 font-normal truncate uppercase tracking-wider">{product.name}</h3>
-                  <div className="flex items-center justify-between mt-1">
-                    <span className="text-[0.75rem] font-medium text-gold/90">
-                      {new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP' }).format(product.price)}
-                    </span>
-                    <button className="text-[0.6rem] tracking-[0.2em] uppercase text-mid/70 dark:text-slate-500 border-b border-transparent hover:border-gold hover:text-gold transition-all py-0.5">
-                      Ver detalle
-                    </button>
-                  </div>
+  return (
+    <section className="py-12 bg-white dark:bg-[#1a1714] border-t border-gold/10 relative overflow-hidden group z-10">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-16 mb-8">
+        <h2 className="font-serif italic text-2xl text-dark dark:text-white font-light tracking-wide text-left">Nuevas Joyas</h2>
+      </div>
+      
+      <div className="relative w-full flex overflow-hidden">
+        <div className="flex gap-5 marquee-content group-hover:[animation-play-state:paused] whitespace-nowrap">
+          {marqueeItems.map((product, index) => (
+            <div 
+              key={`${product.id}-${index}`}
+              onClick={() => navigate(`/producto/${product.id}`)}
+              className="flex-none w-[60%] sm:w-[35%] lg:w-[20%] xl:w-[18%] cursor-pointer mb-2"
+            >
+              <div className="aspect-square overflow-hidden bg-gold-pale dark:bg-slate-900 border border-gold/5 relative mb-3 transition-all duration-500 hover:border-gold/20">
+                <img 
+                  src={product.image} 
+                  alt={product.name}
+                  className={`w-full h-full object-cover transition-all duration-1000 group-hover:scale-105 ${product.stock === 0 ? 'grayscale opacity-60' : ''}`}
+                />
+                <div className="absolute top-2 left-2 flex flex-col gap-1">
+                   {product.stock === 0 ? (
+                     <span className="bg-red-500/80 text-white text-[0.45rem] font-bold px-2 py-0.5 tracking-[0.15em] uppercase shadow-sm backdrop-blur-sm">Agotado</span>
+                   ) : (
+                     <span className="bg-gold/80 text-white text-[0.45rem] font-bold px-2 py-0.5 tracking-[0.15em] uppercase shadow-sm backdrop-blur-sm">Nuevo</span>
+                   )}
                 </div>
               </div>
-            ))}
-          </div>
+              <div className="px-0.5">
+                <h3 className="font-serif text-[0.75rem] text-dark dark:text-white mb-0.5 font-normal truncate uppercase tracking-wider">{product.name}</h3>
+                <div className="flex items-center justify-between mt-1">
+                  <span className="text-[0.7rem] font-medium text-gold/90">
+                    {new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP' }).format(product.price)}
+                  </span>
+                  <button className="text-[0.55rem] tracking-[0.2em] uppercase text-mid/70 dark:text-slate-500 border-b border-transparent hover:border-gold hover:text-gold transition-all py-0.5">
+                    Ver detalle
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
