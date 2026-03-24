@@ -217,7 +217,8 @@ const Hero = ({ onCategorySelect }) => (
 const NewArrivalsCarousel = () => {
   const scrollRef = useRef(null);
   const navigate = useNavigate();
-  const carouselProducts = products.filter(p => p.id >= 10 && p.id <= 20);
+  // Incluimos pulseras 10-20 y dijes 116-123
+  const carouselProducts = products.filter(p => (p.id >= 10 && p.id <= 20) || (p.id >= 116 && p.id <= 123));
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -228,7 +229,6 @@ const NewArrivalsCarousel = () => {
         if (scrollLeft >= maxScroll - 10) {
           scrollRef.current.scrollTo({ left: 0, behavior: 'smooth' });
         } else {
-          // Desplazamiento aproximado de una tarjeta
           const cardWidth = clientWidth > 1024 ? clientWidth / 4.5 : clientWidth / 1.5;
           scrollRef.current.scrollBy({ left: cardWidth, behavior: 'smooth' });
         }
@@ -245,7 +245,6 @@ const NewArrivalsCarousel = () => {
         <h2 className="font-serif italic text-2xl md:text-2xl text-dark dark:text-white font-light tracking-wide mb-8 text-left">Nuevas Joyas</h2>
         
         <div className="relative">
-          {/* Flechas discretas (visibles solo en hover del grupo) */}
           <button 
             onClick={(e) => { e.stopPropagation(); scrollRef.current.scrollBy({left: -300, behavior: 'smooth'}); }}
             className="absolute -left-2 md:-left-4 top-[40%] -translate-y-1/2 z-20 w-8 h-8 flex items-center justify-center text-gold opacity-0 group-hover:opacity-100 transition-opacity bg-white/90 dark:bg-dark/90 rounded-full shadow-sm border border-gold/10"
@@ -275,10 +274,14 @@ const NewArrivalsCarousel = () => {
                   <img 
                     src={product.image} 
                     alt={product.name}
-                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                    className={`w-full h-full object-cover transition-all duration-1000 ${product.stock === 0 ? 'grayscale opacity-60' : ''}`}
                   />
-                  <div className="absolute top-2 left-2">
-                     <span className="bg-gold/80 text-white text-[0.45rem] font-bold px-2 py-0.5 tracking-[0.15em] uppercase shadow-sm backdrop-blur-sm">Nuevo</span>
+                  <div className="absolute top-2 left-2 flex flex-col gap-1">
+                     {product.stock === 0 ? (
+                       <span className="bg-red-500/80 text-white text-[0.45rem] font-bold px-2 py-0.5 tracking-[0.15em] uppercase shadow-sm backdrop-blur-sm">Agotado</span>
+                     ) : (
+                       <span className="bg-gold/80 text-white text-[0.45rem] font-bold px-2 py-0.5 tracking-[0.15em] uppercase shadow-sm backdrop-blur-sm">Nuevo</span>
+                     )}
                   </div>
                 </div>
                 <div className="px-0.5">
@@ -288,7 +291,7 @@ const NewArrivalsCarousel = () => {
                       {new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP' }).format(product.price)}
                     </span>
                     <button className="text-[0.6rem] tracking-[0.2em] uppercase text-mid/70 dark:text-slate-500 border-b border-transparent hover:border-gold hover:text-gold transition-all py-0.5">
-                      Detalles
+                      Ver detalle
                     </button>
                   </div>
                 </div>
