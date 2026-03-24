@@ -233,6 +233,10 @@ const ProductCard = ({ product, isFavorite, onToggleFavorite, onAddToCart, isSto
           <span className="absolute top-2.5 left-2.5 bg-red-600 text-white text-[0.55rem] tracking-widest uppercase px-2 py-0.5 z-20 font-bold shadow-sm">
             AGOTADO
           </span>
+        ) : (product.id >= 10 && product.id <= 20) ? (
+          <span className="absolute top-2.5 left-2.5 bg-[#D4AF37] text-white text-[0.55rem] tracking-widest uppercase px-2.5 py-1 z-20 font-bold shadow-lg border border-white/20 rounded-sm animate-pulse-subtle">
+            RECIÉN LLEGADO
+          </span>
         ) : product.tag && (
           <span className="absolute top-2.5 left-2.5 bg-dark dark:bg-gold text-gold-light dark:text-white text-[0.55rem] tracking-widest uppercase px-2 py-0.5">
             {product.tag}
