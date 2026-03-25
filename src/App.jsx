@@ -383,9 +383,7 @@ const Footer = ({ onCategorySelect }) => {
             <span className="font-serif italic text-2xl text-white tracking-tight">Lúmina</span>
             <span className="font-sans text-[0.45rem] tracking-[0.3em] uppercase text-gold-light mt-0.5">Accesorios</span>
           </Link>
-          <p className="text-[0.8rem] font-light leading-relaxed text-white/40 max-w-[220px]">
-            Joyería artesanal diseñada para capturar tus momentos más especiales.
-          </p>
+
         </div>
 
         <div>
