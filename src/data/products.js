@@ -8,7 +8,7 @@ export const products = [
         price: 14990,
         image: "/products/pulseras/P001_blanco.jpg",
         tag: "Nuevo",
-        stock: 1,
+        stock: 0,
         description: "Nueva pulsera de la Colección Esenciales. Diseñada para ser la base perfecta donde construir tu historia con dijes. Cierre ajustable para adaptarse a cualquier muñeca. Material de alta calidad, resistente al uso diario.\n\nPrecauciones y cuidado:\n• Evita el contacto: No expongas la joya a perfumes, cremas, alcohol gel, cloro, detergentes u otros químicos.\n• Uso adecuado: No usar en ducha, piscina o mar (el cloro y la sal aceleran el desgaste).\n• Almacenamiento: Guardar en una bolsa o caja seca cuando no se use para evitar rayas y oxidación.\n• Limpieza: Limpiar con un paño suave para plata. No uses productos abrasivos.\n• Nota sobre la Plata 925: Puede oscurecerse con el tiempo por oxidación natural, pero se recupera fácilmente con una limpieza adecuada.\n• Manejo: Evita tirones o forzar el broche o cadena de seguridad.\n• Recomendación: No sobrecargar con demasiados dijes para mantener el ajuste y la forma original de la pieza."
     },
     {
@@ -19,7 +19,7 @@ export const products = [
         price: 14990,
         image: "/products/pulseras/P002_blanco.jpg",
         tag: null,
-        stock: 1,
+        stock: 0,
         description: "Pulsera de la Colección Esenciales con diseño atemporal. Su versatilidad la hace perfecta para el uso diario o para una ocasión especial. Compatible con todos los dijes de nuestra colección.\n\nPrecauciones y cuidado:\n• Evita el contacto: No expongas la joya a perfumes, cremas, alcohol gel, cloro, detergentes u otros químicos.\n• Uso adecuado: No usar en ducha, piscina o mar (el cloro y la sal aceleran el desgaste).\n• Almacenamiento: Guardar en una bolsa o caja seca cuando no se use para evitar rayas y oxidación.\n• Limpieza: Limpiar con un paño suave para plata. No uses productos abrasivos.\n• Nota sobre la Plata 925: Puede oscurecerse con el tiempo por oxidación natural, pero se recupera fácilmente con una limpieza adecuada.\n• Manejo: Evita tirones o forzar el broche o cadena de seguridad.\n• Recomendación: No sobrecargar con demasiados dijes para mantener el ajuste y la forma original de la pieza."
     },
     {
@@ -41,7 +41,7 @@ export const products = [
         price: 14990,
         image: "/products/pulseras/P004_blanco.jpg",
         tag: null,
-        stock: 1,
+        stock: 0,
         description: "Pulsera P004 de la Colección Esenciales. Una pieza de diseño limpio y moderno que se adapta a todos los estilos. Perfecta como base para añadir tus dijes favoritos o como accesorio independiente.\n\nPrecauciones y cuidado:\n• Evita el contacto: No expongas la joya a perfumes, cremas, alcohol gel, cloro, detergentes u otros químicos.\n• Uso adecuado: No usar en ducha, piscina o mar (el cloro y la sal aceleran el desgaste).\n• Almacenamiento: Guardar en una bolsa o caja seca cuando no se use para evitar rayas y oxidación.\n• Limpieza: Limpiar con un paño suave para plata. No uses productos abrasivos.\n• Nota sobre la Plata 925: Puede oscurecerse con el tiempo por oxidación natural, pero se recupera fácilmente con una limpieza adecuada.\n• Manejo: Evita tirones o forzar el broche o cadena de seguridad.\n• Recomendación: No sobrecargar con demasiados dijes para mantener el ajuste y la forma original de la pieza."
     },
     {
@@ -52,7 +52,7 @@ export const products = [
         price: 14990,
         image: "/products/pulseras/P005_blanco.jpg",
         tag: "Best Seller",
-        stock: 1,
+        stock: 0,
         description: "Nuestra pulsera más popular. La P005 de la Colección Esenciales combina diseño, comodidad y calidad en una sola pieza. Elegida por nuestras clientas como la favorita para personalizar con dijes. Resistente y duradera.\n\nPrecauciones y cuidado:\n• Evita el contacto: No expongas la joya a perfumes, cremas, alcohol gel, cloro, detergentes u otros químicos.\n• Uso adecuado: No usar en ducha, piscina o mar (el cloro y la sal aceleran el desgaste).\n• Almacenamiento: Guardar en una bolsa o caja seca cuando no se use para evitar rayas y oxidación.\n• Limpieza: Limpiar con un paño suave para plata. No uses productos abrasivos.\n• Nota sobre la Plata 925: Puede oscurecerse con el tiempo por oxidación natural, pero se recupera fácilmente con una limpieza adecuada.\n• Manejo: Evita tirones o forzar el broche o cadena de seguridad.\n• Recomendación: No sobrecargar con demasiados dijes para mantener el ajuste y la forma original de la pieza."
     },
     {
@@ -85,7 +85,7 @@ export const products = [
         price: 14990,
         image: "/products/pulseras/P008_blanco.jpg",
         tag: null,
-        stock: 1,
+        stock: 0,
         description: "Refinada pulsera P008 de la Colección Esenciales. Material de primera calidad con un acabado que mantiene su brillo con el tiempo. Compatible con los dijes de nuestra colección Plata 925.\n\nPrecauciones y cuidado:\n• Evita el contacto: No expongas la joya a perfumes, cremas, alcohol gel, cloro, detergentes u otros químicos.\n• Uso adecuado: No usar en ducha, piscina o mar (el cloro y la sal aceleran el desgaste).\n• Almacenamiento: Guardar en una bolsa o caja seca cuando no se use para evitar rayas y oxidación.\n• Limpieza: Limpiar con un paño suave para plata. No uses productos abrasivos.\n• Nota sobre la Plata 925: Puede oscurecerse con el tiempo por oxidación natural, pero se recupera fácilmente con una limpieza adecuada.\n• Manejo: Evita tirones o forzar el broche o cadena de seguridad.\n• Recomendación: No sobrecargar con demasiados dijes para mantener el ajuste y la forma original de la pieza."
     },
     {
@@ -107,7 +107,7 @@ export const products = [
         price: 14990,
         image: "/products/pulseras/P010_blanco.jpg",
         tag: "Nuevo",
-        stock: 1,
+        stock: 0,
         description: "Elegante pulsera P010 de la Colección Esenciales. Su diseño minimalista y versátil la hace perfecta para complementar cualquier estilo. Material de alta calidad, resistente e.\n\nPrecauciones y cuidado:\n• Evita el contacto: No expongas la joya a perfumes, cremas, alcohol gel, cloro, detergentes u otros químicos.\n• Uso adecuado: No usar en ducha, piscina o mar (el cloro y la sal aceleran el desgaste).\n• Almacenamiento: Guardar en una bolsa o caja seca cuando no se use para evitar rayas y oxidación.\n• Limpieza: Limpiar con un paño suave para plata. No uses productos abrasivos.\n• Nota sobre la Plata 925: Puede oscurecerse con el tiempo por oxidación natural, pero se recupera fácilmente con una limpieza adecuada.\n• Manejo: Evita tirones o forzar el broche o cadena de seguridad.\n• Recomendación: No sobrecargar con demasiados dijes para mantener el ajuste y la forma original de la pieza."
     },
     {
@@ -151,7 +151,7 @@ export const products = [
         price: 14990,
         image: "/products/pulseras/P014_blanco.png",
         tag: "Nuevo",
-        stock: 1,
+        stock: 0,
         description: "La Pulsera P014 es el complemento ideal para quienes buscan sutileza y elegancia. Su diseño atemporal asegura que sea una pieza clave en tu joyero por años. Fabricada sin níquel, cuidando tu piel.\n\nPrecauciones y cuidado:\n• Evita el contacto: No expongas la joya a perfumes, cremas, alcohol gel, cloro, detergentes u otros químicos.\n• Uso adecuado: No usar en ducha, piscina o mar (el cloro y la sal aceleran el desgaste).\n• Almacenamiento: Guardar en una bolsa o caja seca cuando no se use para evitar rayas y oxidación.\n• Limpieza: Limpiar con un paño suave para plata. No uses productos abrasivos.\n• Nota sobre la Plata 925: Puede oscurecerse con el tiempo por oxidación natural, pero se recupera fácilmente con una limpieza adecuada.\n• Manejo: Evita tirones o forzar el broche o cadena de seguridad.\n• Recomendación: No sobrecargar con demasiados dijes para mantener el ajuste y la forma original de la pieza."
     },
     {
@@ -208,7 +208,7 @@ export const products = [
         price: 7990,
         image: "/products/dijes/001_blanco.jpg",
         tag: "Nuevo",
-        stock: 1,
+        stock: 0,
         description: "Delicado dije de plata 925 con acabado brillante. Su diseño minimalista lo hace perfecto para crear tu pulsera personalizada o llevarlo en un collar. Ideal para regalar o para agregar a tu colección.\n\nPrecauciones y cuidado:\n• Evita el contacto: No expongas la joya a perfumes, cremas, alcohol gel, cloro, detergentes u otros químicos.\n• Uso adecuado: No usar en ducha, piscina o mar (el cloro y la sal aceleran el desgaste).\n• Almacenamiento: Guardar en una bolsa o caja seca cuando no se use para evitar rayas y oxidación.\n• Limpieza: Limpiar con un paño suave para plata. No uses productos abrasivos.\n• Nota sobre la Plata 925: Puede oscurecerse con el tiempo por oxidación natural, pero se recupera fácilmente con una limpieza adecuada.\n• Manejo: Evita tirones o forzar el broche o cadena de seguridad.\n• Recomendación: No sobrecargar con demasiados dijes para mantener el ajuste y la forma original de la pieza."
     },
     {
@@ -252,7 +252,7 @@ export const products = [
         price: 7990,
         image: "/products/dijes/005_blanco.jpg",
         tag: null,
-        stock: 1,
+        stock: 0,
         description: "Sofisticado dije en plata de ley 925. Diseñado para quienes buscan piezas con carácter propio. Perfecto para regalar o para completar un look elegante.\n\nPrecauciones y cuidado:\n• Evita el contacto: No expongas la joya a perfumes, cremas, alcohol gel, cloro, detergentes u otros químicos.\n• Uso adecuado: No usar en ducha, piscina o mar (el cloro y la sal aceleran el desgaste).\n• Almacenamiento: Guardar en una bolsa o caja seca cuando no se use para evitar rayas y oxidación.\n• Limpieza: Limpiar con un paño suave para plata. No uses productos abrasivos.\n• Nota sobre la Plata 925: Puede oscurecerse con el tiempo por oxidación natural, pero se recupera fácilmente con una limpieza adecuada.\n• Manejo: Evita tirones o forzar el broche o cadena de seguridad.\n• Recomendación: No sobrecargar con demasiados dijes para mantener el ajuste y la forma original de la pieza."
     },
     {
@@ -285,7 +285,7 @@ export const products = [
         price: 7990,
         image: "/products/dijes/008_blanco.jpg",
         tag: null,
-        stock: 1,
+        stock: 0,
         description: "Cuidado dije artesanal en plata 925 con terminación de alta calidad. Cada detalle ha sido pensado para que esta pieza dure toda una vida. Un regalo perfecto o una joya para atesorar.\n\nPrecauciones y cuidado:\n• Evita el contacto: No expongas la joya a perfumes, cremas, alcohol gel, cloro, detergentes u otros químicos.\n• Uso adecuado: No usar en ducha, piscina o mar (el cloro y la sal aceleran el desgaste).\n• Almacenamiento: Guardar en una bolsa o caja seca cuando no se use para evitar rayas y oxidación.\n• Limpieza: Limpiar con un paño suave para plata. No uses productos abrasivos.\n• Nota sobre la Plata 925: Puede oscurecerse con el tiempo por oxidación natural, pero se recupera fácilmente con una limpieza adecuada.\n• Manejo: Evita tirones o forzar el broche o cadena de seguridad.\n• Recomendación: No sobrecargar con demasiados dijes para mantener el ajuste y la forma original de la pieza."
     },
     {
@@ -362,7 +362,7 @@ export const products = [
         price: 7990,
         image: "/products/dijes/015_blanco.jpg",
         tag: null,
-        stock: 1,
+        stock: 0,
         description: "Dije exclusivo de plata 925 con diseño inspirado en la naturaleza. Una pieza con alma propia que cuenta una historia. Ideal para armar una pulsera personalizada que refleje tu esencia. y alérgenos.\n\nPrecauciones y cuidado:\n• Evita el contacto: No expongas la joya a perfumes, cremas, alcohol gel, cloro, detergentes u otros químicos.\n• Uso adecuado: No usar en ducha, piscina o mar (el cloro y la sal aceleran el desgaste).\n• Almacenamiento: Guardar en una bolsa o caja seca cuando no se use para evitar rayas y oxidación.\n• Limpieza: Limpiar con un paño suave para plata. No uses productos abrasivos.\n• Nota sobre la Plata 925: Puede oscurecerse con el tiempo por oxidación natural, pero se recupera fácilmente con una limpieza adecuada.\n• Manejo: Evita tirones o forzar el broche o cadena de seguridad.\n• Recomendación: No sobrecargar con demasiados dijes para mantener el ajuste y la forma original de la pieza."
     }
 ,
@@ -374,7 +374,7 @@ export const products = [
         price: 7990,
         image: "/products/dijes/D016_blanco.jpg",
         tag: "Nuevo",
-        stock: 1,
+        stock: 0,
         description: "Exclusivo dije D016 en plata de ley 925. Un diseño sofisticado y moderno que captura la esencia de la elegancia artesanal.\n\nPrecauciones y cuidado:\n• Evita el contacto: No expongas la joya a perfumes, cremas, alcohol gel, cloro, detergentes u otros químicos.\n• Uso adecuado: No usar en ducha, piscina o mar (el cloro y la sal aceleran el desgaste).\n• Almacenamiento: Guardar en una bolsa o caja seca cuando no se use para evitar rayas y oxidación.\n• Limpieza: Limpiar con un paño suave para plata. No uses productos abrasivos.\n• Nota sobre la Plata 925: Puede oscurecerse con el tiempo por oxidación natural, pero se recupera fácilmente con una limpieza adecuada.\n• Manejo: Evita tirones o forzar el broche o cadena de seguridad.\n• Recomendación: No sobrecargar con demasiados dijes para mantener el ajuste y la forma original de la pieza."
     },
     {
@@ -385,7 +385,7 @@ export const products = [
         price: 7990,
         image: "/products/dijes/D017_blanco.jpg",
         tag: "Nuevo",
-        stock: 1,
+        stock: 0,
         description: "Refinado dije D017 de nuestra colección Plata 925. Destaca por su acabado impecable y su versatilidad para cualquier ocasión.\n\nPrecauciones y cuidado:\n• Evita el contacto: No expongas la joya a perfumes, cremas, alcohol gel, cloro, detergentes u otros químicos.\n• Uso adecuado: No usar en ducha, piscina o mar (el cloro y la sal aceleran el desgaste).\n• Almacenamiento: Guardar en una bolsa o caja seca cuando no se use para evitar rayas y oxidación.\n• Limpieza: Limpiar con un paño suave para plata. No uses productos abrasivos.\n• Nota sobre la Plata 925: Puede oscurecerse con el tiempo por oxidación natural, pero se recupera fácilmente con una limpieza adecuada.\n• Manejo: Evita tirones o forzar el broche o cadena de seguridad.\n• Recomendación: No sobrecargar con demasiados dijes para mantener el ajuste y la forma original de la pieza."
     },
     {
@@ -396,7 +396,7 @@ export const products = [
         price: 7990,
         image: "/products/dijes/D018_blanco.jpeg",
         tag: "Nuevo",
-        stock: 1,
+        stock: 0,
         description: "Precioso dije artesanal D018 en plata 925. Una pieza única que añade un toque de distinción a tu colección personalizada.\n\nPrecauciones y cuidado:\n• Evita el contacto: No expongas la joya a perfumes, cremas, alcohol gel, cloro, detergentes u otros químicos.\n• Uso adecuado: No usar en ducha, piscina o mar (el cloro y la sal aceleran el desgaste).\n• Almacenamiento: Guardar en una bolsa o caja seca cuando no se use para evitar rayas y oxidación.\n• Limpieza: Limpiar con un paño suave para plata. No uses productos abrasivos.\n• Nota sobre la Plata 925: Puede oscurecerse con el tiempo por oxidación natural, pero se recupera fácilmente con una limpieza adecuada.\n• Manejo: Evita tirones o forzar el broche o cadena de seguridad.\n• Recomendación: No sobrecargar con demasiados dijes para mantener el ajuste y la forma original de la pieza."
     },
     {
@@ -407,7 +407,7 @@ export const products = [
         price: 7990,
         image: "/products/dijes/D019_blanco.jpeg",
         tag: "Nuevo",
-        stock: 1,
+        stock: 0,
         description: "Elegante dije D019 de diseño contemporáneo en plata de ley 925. Ideal para llevar solo o combinar en tu pulsera favorita.\n\nPrecauciones y cuidado:\n• Evita el contacto: No expongas la joya a perfumes, cremas, alcohol gel, cloro, detergentes u otros químicos.\n• Uso adecuado: No usar en ducha, piscina o mar (el cloro y la sal aceleran el desgaste).\n• Almacenamiento: Guardar en una bolsa o caja seca cuando no se use para evitar rayas y oxidación.\n• Limpieza: Limpiar con un paño suave para plata. No uses productos abrasivos.\n• Nota sobre la Plata 925: Puede oscurecerse con el tiempo por oxidación natural, pero se recupera fácilmente con una limpieza adecuada.\n• Manejo: Evita tirones o forzar el broche o cadena de seguridad.\n• Recomendación: No sobrecargar con demasiados dijes para mantener el ajuste y la forma original de la pieza."
     },
     {
@@ -418,7 +418,7 @@ export const products = [
         price: 7990,
         image: "/products/dijes/D020_blanco.jpeg",
         tag: "Nuevo",
-        stock: 1,
+        stock: 0,
         description: "Dije exclusivo D020 en plata 925 con terminaciones de alta joyería. Una joya diseñada para durar y brillar siempre.\n\nPrecauciones y cuidado:\n• Evita el contacto: No expongas la joya a perfumes, cremas, alcohol gel, cloro, detergentes u otros químicos.\n• Uso adecuado: No usar en ducha, piscina o mar (el cloro y la sal aceleran el desgaste).\n• Almacenamiento: Guardar en una bolsa o caja seca cuando no se use para evitar rayas y oxidación.\n• Limpieza: Limpiar con un paño suave para plata. No uses productos abrasivos.\n• Nota sobre la Plata 925: Puede oscurecerse con el tiempo por oxidación natural, pero se recupera fácilmente con una limpieza adecuada.\n• Manejo: Evita tirones o forzar el broche o cadena de seguridad.\n• Recomendación: No sobrecargar con demasiados dijes para mantener el ajuste y la forma original de la pieza."
     },
     {
@@ -440,7 +440,7 @@ export const products = [
         price: 7990,
         image: "/products/dijes/D022_blanco.jpg",
         tag: "Nuevo",
-        stock: 1,
+        stock: 0,
         description: "Sofisticado dije D022 de nuestra línea Plata 925. Una pieza que fusiona tradición y modernidad en un diseño excepcional.\n\nPrecauciones y cuidado:\n• Evita el contacto: No expongas la joya a perfumes, cremas, alcohol gel, cloro, detergentes u otros químicos.\n• Uso adecuado: No usar en ducha, piscina o mar (el cloro y la sal aceleran el desgaste).\n• Almacenamiento: Guardar en una bolsa o caja seca cuando no se use para evitar rayas y oxidación.\n• Limpieza: Limpiar con un paño suave para plata. No uses productos abrasivos.\n• Nota sobre la Plata 925: Puede oscurecerse con el tiempo por oxidación natural, pero se recupera fácilmente con una limpieza adecuada.\n• Manejo: Evita tirones o forzar el broche o cadena de seguridad.\n• Recomendación: No sobrecargar con demasiados dijes para mantener el ajuste y la forma original de la pieza."
     },
     {
@@ -451,7 +451,7 @@ export const products = [
         price: 7990,
         image: "/products/dijes/D023_blanco.jpeg",
         tag: "Nuevo",
-        stock: 1,
+        stock: 0,
         description: "Moderno dije D023 de nuestra Colección Plata 925. La pieza ideal para completar tu colección con un detalle de alta calidad.\n\nPrecauciones y cuidado:\n• Evita el contacto: No expongas la joya a perfumes, cremas, alcohol gel, cloro, detergentes u otros químicos.\n• Uso adecuado: No usar en ducha, piscina o mar (el cloro y la sal aceleran el desgaste).\n• Almacenamiento: Guardar en una bolsa o caja seca cuando no se use para evitar rayas y oxidación.\n• Limpieza: Limpiar con un paño suave para plata. No uses productos abrasivos.\n• Nota sobre la Plata 925: Puede oscurecerse con el tiempo por oxidación natural, pero se recupera fácilmente con una limpieza adecuada.\n• Manejo: Evita tirones o forzar el broche o cadena de seguridad.\n• Recomendación: No sobrecargar con demasiados dijes para mantener el ajuste y la forma original de la pieza."
     },
     {
@@ -462,7 +462,7 @@ export const products = [
         price: 7990,
         image: "/products/cadenas/CS001.jpg",
         tag: "Nuevo",
-        stock: 5,
+        stock: 0,
         description: "Elegante Cadena de Seguridad CS001 en Plata 925. Diseñada para proteger tus dijes y darle un toque extra de sofisticación a tu pulsera.\n\nPrecauciones y cuidado:\n• Evita el contacto: No expongas la joya a perfumes, cremas, alcohol gel, cloro, detergentes u otros químicos.\n• Uso adecuado: No usar en ducha, piscina o mar (el cloro y la sal aceleran el desgaste).\n• Almacenamiento: Guardar en una bolsa o caja seca cuando no se use para evitar rayas y oxidación.\n• Limpieza: Limpiar con un paño suave para plata. No uses productos abrasivos.\n• Nota sobre la Plata 925: Puede oscurecerse con el tiempo por oxidación natural, pero se recupera fácilmente con una limpieza adecuada.\n• Manejo: Evita tirones o forzar el broche o cadena de seguridad."
     },
     {
